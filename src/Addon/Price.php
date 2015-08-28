@@ -1,6 +1,7 @@
 <?php
 
 namespace Nocks\SDK\Addon;
+
 use GuzzleHttp\Client;
 
 /**

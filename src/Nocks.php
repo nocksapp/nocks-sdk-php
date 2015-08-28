@@ -2,6 +2,7 @@
 
 namespace Nocks\SDK;
 
+use Nocks\SDK\Addon\Qr;
 use Nocks\SDK\Addon\Price;
 use Nocks\SDK\Api\Transaction;
 
@@ -14,13 +15,22 @@ class Nocks
     /* @var Api\Transaction $transaction */
     protected $transaction;
 
+    /* @var Addon\Price $price */
+    protected $price;
+
+    /* @var Addon\Qr $qr */
+    protected $qr;
+
     public function __construct()
     {
         $this->transaction = new Transaction();
         $this->price = new Price();
+        $this->qr = new Qr();
     }
 
     /**
+     * Creates a transaction and returns transaction details
+     *
      * @param $pair
      * @param $amount
      * @param $withdrawal
@@ -38,6 +48,8 @@ class Nocks
     }
 
     /**
+     * Get transaction details
+     *
      * @param $transactionId
      * @return Connection\Response
      */
@@ -47,11 +59,25 @@ class Nocks
     }
 
     /**
+     * Get current price based on provided curreny code
+     *
      * @param $currencyCode
      * @return mixed
      */
     public function getCurrentPrice($currencyCode)
     {
         return $this->price->getCurrentPrice($currencyCode);
+    }
+
+    /**
+     * Render QR Code
+     *
+     * @param $text
+     * @param int $size
+     * @return string
+     */
+    public function renderQrCode($text, $size = 200)
+    {
+        return $this->qr->render($text, $size);
     }
 }
