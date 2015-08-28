@@ -2,6 +2,7 @@
 
 namespace Nocks\SDK;
 
+use Nocks\SDK\Addon\Price;
 use Nocks\SDK\Api\Transaction;
 
 /**
@@ -16,6 +17,7 @@ class Nocks
     public function __construct()
     {
         $this->transaction = new Transaction();
+        $this->price = new Price();
     }
 
     /**
@@ -42,5 +44,14 @@ class Nocks
     public function getTransaction($transactionId)
     {
         return $this->transaction->get($transactionId);
+    }
+
+    /**
+     * @param $currencyCode
+     * @return mixed
+     */
+    public function getCurrentPrice($currencyCode)
+    {
+        return $this->price->getCurrentPrice($currencyCode);
     }
 }
