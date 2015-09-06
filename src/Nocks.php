@@ -3,8 +3,9 @@
 namespace Nocks\SDK;
 
 use Nocks\SDK\Addon\Qr;
-use Nocks\SDK\Addon\Price;
+use Nocks\SDK\Addon\Rate;
 use Nocks\SDK\Api\Transaction;
+use Nocks\SDK\Api\Price;
 
 /**
  * Class Nocks
@@ -15,8 +16,11 @@ class Nocks
     /* @var Api\Transaction $transaction */
     protected $transaction;
 
-    /* @var Addon\Price $price */
+    /* @var Api\Price $price */
     protected $price;
+
+    /* @var Addon\Rate $price */
+    protected $rate;
 
     /* @var Addon\Qr $qr */
     protected $qr;
@@ -25,6 +29,7 @@ class Nocks
     {
         $this->transaction = new Transaction();
         $this->price = new Price();
+        $this->rate = new Rate();
         $this->qr = new Qr();
     }
 
@@ -59,14 +64,36 @@ class Nocks
     }
 
     /**
-     * Get current price based on provided curreny code
+     * Calculates the price for the transaction
+     *
+     * @param $pair
+     * @param $amount
+     * @return int
+     */
+    public function calculatePrice($pair, $amount)
+    {
+        $price = $this->price->calculate(array(
+            'pair' => $pair,
+            'amount' => $amount
+        ));
+
+        if(isset($price['success']) && isset($price['success']['amount']))
+        {
+            return $price['success']['amount'];
+        }
+
+        return 0;
+    }
+
+    /**
+     * Get current price based on provided currency code
      *
      * @param $currencyCode
      * @return mixed
      */
-    public function getCurrentPrice($currencyCode)
+    public function getCurrentRate($currencyCode)
     {
-        return $this->price->getCurrentPrice($currencyCode);
+        return $this->rate->getCurrentRate($currencyCode);
     }
 
     /**

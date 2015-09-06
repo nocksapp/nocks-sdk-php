@@ -5,19 +5,19 @@ namespace Nocks\SDK\Addon;
 use GuzzleHttp\Client;
 
 /**
- * Class Price
+ * Class Rate
  * @package Nocks\SDK\Addon
  */
-class Price
+class Rate
 {
     public function __construct()
     {
         $this->client = new Client();
     }
 
-    function getCurrentPrice($currencyCode)
+    function getCurrentRate($currencyCode)
     {
-        $price = 0;
+        $rate = 0;
 
         if(in_array($currencyCode, array('USD', 'GBP', 'EUR')))
         {
@@ -27,7 +27,7 @@ class Price
 
             if(isset($response['bpi'][$currencyCode]['rate']))
             {
-                $price = $response['bpi'][$currencyCode]['rate'];
+                $rate = $response['bpi'][$currencyCode]['rate'];
             }
         }
         elseif(in_array($currencyCode, array('BTC', 'NLG')))
@@ -38,10 +38,10 @@ class Price
 
             if(isset($response['result']['Last']))
             {
-                $price = $response['result']['Last'];
+                $rate = $response['result']['Last'];
             }
         }
 
-        return $price;
+        return $rate;
     }
 }
