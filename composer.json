@@ -1,0 +1,18 @@
+{
+  "name": "nocksapp/nocks-sdk-php",
+  "description": "PHP SDK for the Nocks API",
+  "homepage": "https://nocks.nl/",
+  "keywords": ["nocks", "bitcoin", "guldencoin", "sdk", "api", "blockchain", "payment", "transaction"],
+  "autoload": {
+    "psr-4": {
+      "Nocks\\SDK\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=5.4.0",
+
+    "guzzlehttp/guzzle": "5.3.*",
+    "arcanedev/qr-code": "1.0.*"
+  },
+  "license": "MIT"
+}
