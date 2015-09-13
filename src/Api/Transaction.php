@@ -25,7 +25,7 @@ class Transaction extends Api
      */
     public function get($transactionId)
     {
-        $transaction = $this->client->get('transaction', null, $transactionId);
+        $transaction = $this->client->get('transaction/'.$transactionId);
 
         return json_decode($transaction->body(), true);
     }
