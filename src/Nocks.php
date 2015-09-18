@@ -4,6 +4,7 @@ namespace Nocks\SDK;
 
 use Nocks\SDK\Addon\Qr;
 use Nocks\SDK\Addon\Rate;
+use Nocks\SDK\Addon\ValidateAddress;
 use Nocks\SDK\Api\Transaction;
 use Nocks\SDK\Api\Price;
 
@@ -25,12 +26,16 @@ class Nocks
     /* @var Addon\Qr $qr */
     protected $qr;
 
+    /* @var Addon\ValidateAddress $validateAddress */
+    protected $validateAddress;
+
     public function __construct()
     {
         $this->transaction = new Transaction();
         $this->price = new Price();
         $this->rate = new Rate();
         $this->qr = new Qr();
+        $this->validateAddress = new ValidateAddress();
     }
 
     /**
@@ -106,5 +111,17 @@ class Nocks
     public function renderQrCode($text, $size = 200)
     {
         return $this->qr->render($text, $size);
+    }
+
+    /**
+     * Validates BTC and NLG addresses
+     *
+     * @param $currencyCode
+     * @param $address
+     * @return mixed
+     */
+    public function validateAddress($currencyCode, $address)
+    {
+        return $this->validateAddress->validate($currencyCode, $address);
     }
 }
