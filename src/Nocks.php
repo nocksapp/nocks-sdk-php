@@ -73,13 +73,15 @@ class Nocks
      *
      * @param $pair
      * @param $amount
+     * @param $fee
      * @return int
      */
-    public function calculatePrice($pair, $amount)
+    public function calculatePrice($pair, $amount, $fee = 'yes')
     {
         $price = $this->price->calculate(array(
             'pair' => $pair,
-            'amount' => $amount
+            'amount' => $amount,
+            'fee' => $fee
         ));
 
         if(isset($price['success']) && isset($price['success']['amount']))
