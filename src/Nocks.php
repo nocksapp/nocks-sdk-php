@@ -45,15 +45,17 @@ class Nocks
      * @param $amount
      * @param $withdrawal
      * @param $returnUrl
+     * @param $fee
      * @return Connection\Response
      */
-    public function createTransaction($pair, $amount, $withdrawal, $returnUrl = '')
+    public function createTransaction($pair, $amount, $withdrawal, $returnUrl = '', $fee = 'deposit')
     {
         return $this->transaction->create(array(
             'pair' => $pair,
             'amount' => $amount,
             'withdrawal' => $withdrawal,
-            'returnUrl' => $returnUrl
+            'returnUrl' => $returnUrl,
+            'fee' => $fee
         ));
     }
 
