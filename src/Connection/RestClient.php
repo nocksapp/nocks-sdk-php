@@ -26,7 +26,7 @@ class RestClient {
                     'Accept' => '*/*'
                 ),
                 'debug' => false,
-                'cert' => dirname(__FILE__) . '/cacert.pem'
+                'verify' => dirname(__FILE__) . '/cacert.pem'
             )
         ));
     }
