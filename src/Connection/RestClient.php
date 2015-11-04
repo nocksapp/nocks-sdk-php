@@ -25,7 +25,8 @@ class RestClient {
                 'headers' => array(
                     'Accept' => '*/*'
                 ),
-                'debug' => false
+                'debug' => false,
+                'cert' => dirname(__FILE__) . '/cacert.pem'
             )
         ));
     }
