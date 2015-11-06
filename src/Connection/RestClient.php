@@ -3,9 +3,7 @@
 namespace Nocks\SDK\Connection;
 
 use GuzzleHttp\Client as Guzzle;
-use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Message\ResponseInterface;
-use GuzzleHttp\Stream\Stream;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class RestClient
@@ -20,14 +18,12 @@ class RestClient {
 
     public function __construct($apiEndpoint) {
         $this->guzzle = new Guzzle(array(
-            'base_url' => $apiEndpoint,
-            'defaults' => array(
-                'headers' => array(
-                    'Accept' => '*/*'
-                ),
-                'debug' => false,
-                'verify' => dirname(__FILE__) . '/cacert.pem'
-            )
+            'base_uri' => $apiEndpoint,
+            'headers' => array(
+                'Accept' => '*/*',
+                'Content-Type' => 'application/json'
+            ),
+            'debug' => false
         ));
     }
 
@@ -135,23 +131,15 @@ class RestClient {
      */
     public function buildRequest($method, $endpointUrl, $queryString = null, $body = null, $auth = null, $contentMD5Mode = null, $timeout = null) {
 
-        $request = $this->guzzle->createRequest($method, $endpointUrl);
+        $options = array();
 
         if ($queryString) {
-            $request->getQuery()->replace($queryString);
+            $options['query'] = $queryString;
         }
 
-        if (!is_null($body)) {
-            if (!$request->hasHeader('Content-Type')) {
-                $request->setHeader('Content-Type', 'application/json');
-            }
+        $options['json'] = $body;
 
-            if (!is_string($body)) {
-                $body = json_encode($body);
-            }
-
-            $request->setBody(Stream::factory($body));
-        }
+        $request = $this->guzzle->request($method, $endpointUrl, $options);
 
         return $request;
     }
@@ -169,10 +157,10 @@ class RestClient {
      * @return Response
      */
     public function request($method, $endpointUrl, $queryString = null, $body = null, $auth = null, $contentMD5Mode = null, $timeout = null) {
-        $request = $this->buildRequest($method, $endpointUrl, $queryString, $body, $auth, $contentMD5Mode, $timeout);
-        $response = $this->guzzle->send($request);
 
-        return $this->responseHandler($response);
+        $request = $this->buildRequest($method, $endpointUrl, $queryString, $body, $auth, $contentMD5Mode, $timeout);
+
+        return $this->responseHandler($request);
     }
 
     public function responseHandler(ResponseInterface $responseObj) {
