@@ -2,7 +2,7 @@
 
 namespace Nocks\SDK\Connection;
 
-use Psr\Http\Message\StreamInterface;
+use GuzzleHttp\Stream\StreamInterface;
 
 /**
  * Class Response
@@ -16,7 +16,7 @@ class Response {
     private $responseCode;
 
     /**
-     * @var \Psr\Http\Message\StreamInterface
+     * @var \GuzzleHttp\Stream\StreamInterface
      */
     private $responseBody;
 
