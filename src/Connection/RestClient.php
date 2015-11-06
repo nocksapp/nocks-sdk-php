@@ -3,7 +3,9 @@
 namespace Nocks\SDK\Connection;
 
 use GuzzleHttp\Client as Guzzle;
-use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Message\RequestInterface;
+use GuzzleHttp\Message\ResponseInterface;
+use GuzzleHttp\Stream\Stream;
 
 /**
  * Class RestClient
@@ -18,12 +20,13 @@ class RestClient {
 
     public function __construct($apiEndpoint) {
         $this->guzzle = new Guzzle(array(
-            'base_uri' => $apiEndpoint,
-            'headers' => array(
-                'Accept' => '*/*',
-                'Content-Type' => 'application/json'
-            ),
-            'debug' => false
+            'base_url' => $apiEndpoint,
+            'defaults' => array(
+                'headers' => array(
+                    'Accept' => '*/*'
+                ),
+                'debug' => false
+            )
         ));
     }
 
@@ -131,15 +134,23 @@ class RestClient {
      */
     public function buildRequest($method, $endpointUrl, $queryString = null, $body = null, $auth = null, $contentMD5Mode = null, $timeout = null) {
 
-        $options = array();
+        $request = $this->guzzle->createRequest($method, $endpointUrl);
 
         if ($queryString) {
-            $options['query'] = $queryString;
+            $request->getQuery()->replace($queryString);
         }
 
-        $options['json'] = $body;
+        if (!is_null($body)) {
+            if (!$request->hasHeader('Content-Type')) {
+                $request->setHeader('Content-Type', 'application/json');
+            }
 
-        $request = $this->guzzle->request($method, $endpointUrl, $options);
+            if (!is_string($body)) {
+                $body = json_encode($body);
+            }
+
+            $request->setBody(Stream::factory($body));
+        }
 
         return $request;
     }
@@ -157,10 +168,10 @@ class RestClient {
      * @return Response
      */
     public function request($method, $endpointUrl, $queryString = null, $body = null, $auth = null, $contentMD5Mode = null, $timeout = null) {
-
         $request = $this->buildRequest($method, $endpointUrl, $queryString, $body, $auth, $contentMD5Mode, $timeout);
+        $response = $this->guzzle->send($request);
 
-        return $this->responseHandler($request);
+        return $this->responseHandler($response);
     }
 
     public function responseHandler(ResponseInterface $responseObj) {
