@@ -14,7 +14,7 @@ class Api
     protected $client;
 
     /* @var $apiEndpoint */
-    protected $apiEndpoint = "http://nocks.nl/api/";
+    protected $apiEndpoint = "http://nocks.co/api/";
 
     public function __construct()
     {
