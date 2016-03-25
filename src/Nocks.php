@@ -71,6 +71,17 @@ class Nocks
     }
 
     /**
+     * Cancel transaction
+     *
+     * @param $transactionId
+     * @return Connection\Response
+     */
+    public function cancelTransaction($transactionId)
+    {
+        return $this->transaction->cancel($transactionId);
+    }
+
+    /**
      * Calculates the price for the transaction
      *
      * @param $pair
