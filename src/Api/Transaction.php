@@ -29,4 +29,15 @@ class Transaction extends Api
 
         return json_decode($transaction->body(), true);
     }
+
+    /**
+     * @param $transactionId
+     * @return \Nocks\SDK\Connection\Response
+     */
+    public function cancel($transactionId)
+    {
+        $transaction = $this->client->put('transaction/'.$transactionId, null, array('status' => 'cancelled'));
+
+        return json_decode($transaction->body(), true);
+    }
 }
