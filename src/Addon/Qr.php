@@ -2,7 +2,7 @@
 
 namespace Nocks\SDK\Addon;
 
-use Arcanedev\QrCode\QrCode;
+use Endroid\QrCode\QrCode;
 
 /**
  * Class Qr
@@ -16,6 +16,6 @@ class Qr
         $qrCode->setText($text);
         $qrCode->setSize($size);
 
-        return $qrCode->image($text);
+        return $qrCode->getDataUri($text);
     }
 }
