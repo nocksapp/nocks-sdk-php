@@ -44,18 +44,24 @@ class Nocks
      * @param $pair
      * @param $amount
      * @param $withdrawal
-     * @param $returnUrl
-     * @param $fee
+     * @param $options
      * @return Connection\Response
      */
-    public function createTransaction($pair, $amount, $withdrawal, $returnUrl = '', $fee = 'deposit')
+    public function createTransaction($pair, $amount, $withdrawal, $options = array())
     {
+        $returnUrl = isset($options['returnUrl']) ? $options['returnUrl'] : null;
+        $fee = isset($options['fee']) ? $options['fee'] : null;
+        $paymentMethod = isset($options['paymentMethod']) ? $options['paymentMethod'] : null;
+        $bank = isset($options['bank']) ? $options['bank'] : null;
+
         return $this->transaction->create(array(
             'pair' => $pair,
             'amount' => $amount,
             'withdrawal' => $withdrawal,
             'returnUrl' => $returnUrl,
-            'fee' => $fee
+            'fee' => $fee,
+            'paymentMethod' => $paymentMethod,
+            'bank' => $bank
         ));
     }
 
