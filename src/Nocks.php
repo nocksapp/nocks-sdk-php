@@ -54,20 +54,15 @@ class Nocks
      */
     public function createTransaction($pair, $amount, $withdrawal, $options = array())
     {
-        $returnUrl = isset($options['returnUrl']) ? $options['returnUrl'] : null;
-        $fee = isset($options['fee']) ? $options['fee'] : null;
-        $paymentMethod = isset($options['paymentMethod']) ? $options['paymentMethod'] : null;
-        $bank = isset($options['bank']) ? $options['bank'] : null;
-
-        return $this->transaction->create(array(
+        $transaction = array(
             'pair' => $pair,
             'amount' => $amount,
             'withdrawal' => $withdrawal,
-            'returnUrl' => $returnUrl,
-            'fee' => $fee,
-            'paymentMethod' => $paymentMethod,
-            'bank' => $bank
-        ));
+        );
+
+        $data = array_merge($transaction, $options);
+
+        return $this->transaction->create($data);
     }
 
     /**
