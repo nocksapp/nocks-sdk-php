@@ -1,7 +1,7 @@
 {
   "name": "nocksapp/nocks-sdk-php",
   "description": "PHP SDK for the Nocks API",
-  "homepage": "https://nocks.nl/",
+  "homepage": "https://nocks.co/",
   "keywords": ["nocks", "bitcoin", "gulden", "sdk", "api", "blockchain", "payment", "transaction"],
   "autoload": {
     "psr-4": {
