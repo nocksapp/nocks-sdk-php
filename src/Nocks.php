@@ -5,6 +5,7 @@ namespace Nocks\SDK;
 use Nocks\SDK\Addon\Qr;
 use Nocks\SDK\Addon\Rate;
 use Nocks\SDK\Addon\ValidateAddress;
+use Nocks\SDK\Api\Settings;
 use Nocks\SDK\Api\Transaction;
 use Nocks\SDK\Api\Price;
 
@@ -23,6 +24,9 @@ class Nocks
     /* @var Addon\Rate $price */
     protected $rate;
 
+    /* @var Api\Settings $settings */
+    protected $settings;
+
     /* @var Addon\Qr $qr */
     protected $qr;
 
@@ -34,6 +38,7 @@ class Nocks
         $this->transaction = new Transaction();
         $this->price = new Price();
         $this->rate = new Rate();
+        $this->settings = new Settings();
         $this->qr = new Qr();
         $this->validateAddress = new ValidateAddress();
     }
@@ -144,5 +149,39 @@ class Nocks
     public function validateAddress($currencyCode, $address)
     {
         return $this->validateAddress->validate($currencyCode, $address);
+    }
+
+    /**
+     * Get list of all available payment methods
+     *
+     * @return mixed
+     */
+    public function listPaymentMethods()
+    {
+        $settings = $this->settings->get();
+
+        if(isset($settings['paymentMethods']))
+        {
+            return $settings['paymentMethods'];
+        }
+
+        return array();
+    }
+
+    /**
+     * Get list of all available banks
+     *
+     * @return mixed
+     */
+    public function listBanks()
+    {
+        $settings = $this->settings->get();
+
+        if(isset($settings['banks']))
+        {
+            return $settings['banks'];
+        }
+
+        return array();
     }
 }
