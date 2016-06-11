@@ -92,14 +92,16 @@ class Nocks
      *
      * @param $pair
      * @param $amount
+     * @param $amountType
      * @param $fee
      * @return int
      */
-    public function calculatePrice($pair, $amount, $fee = 'yes')
+    public function calculatePrice($pair, $amount, $amountType = 'withdrawal', $fee = 'yes')
     {
         $price = $this->price->calculate(array(
             'pair' => $pair,
             'amount' => $amount,
+            'amountType' => $amountType,
             'fee' => $fee
         ));
 
