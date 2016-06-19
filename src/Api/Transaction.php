@@ -14,9 +14,9 @@ class Transaction extends Api
      */
     public function create($transaction)
     {
-        $transaction = $this->client->post('transaction', null, $transaction);
+        $result = $this->client->post('transaction', null, $transaction);
 
-        return json_decode($transaction->body(), true);
+        return json_decode($result->body(), true);
     }
 
     /**
@@ -25,9 +25,9 @@ class Transaction extends Api
      */
     public function get($transactionId)
     {
-        $transaction = $this->client->get('transaction/'.$transactionId);
+        $result = $this->client->get('transaction/'.$transactionId);
 
-        return json_decode($transaction->body(), true);
+        return json_decode($result->body(), true);
     }
 
     /**
@@ -36,8 +36,8 @@ class Transaction extends Api
      */
     public function cancel($transactionId)
     {
-        $transaction = $this->client->put('transaction/'.$transactionId, null, array('status' => 'cancelled'));
+        $result = $this->client->put('transaction/'.$transactionId, null, array('status' => 'cancelled'));
 
-        return json_decode($transaction->body(), true);
+        return json_decode($result->body(), true);
     }
 }

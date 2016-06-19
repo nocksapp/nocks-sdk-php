@@ -5,6 +5,7 @@ namespace Nocks\SDK;
 use Nocks\SDK\Addon\Qr;
 use Nocks\SDK\Addon\Rate;
 use Nocks\SDK\Addon\ValidateAddress;
+use Nocks\SDK\Api\Market;
 use Nocks\SDK\Api\Settings;
 use Nocks\SDK\Api\Transaction;
 use Nocks\SDK\Api\Price;
@@ -27,6 +28,9 @@ class Nocks
     /* @var Api\Settings $settings */
     protected $settings;
 
+    /* @var Api\Market $market */
+    protected $market;
+
     /* @var Addon\Qr $qr */
     protected $qr;
 
@@ -39,6 +43,7 @@ class Nocks
         $this->price = new Price();
         $this->rate = new Rate();
         $this->settings = new Settings();
+        $this->market = new Market();
         $this->qr = new Qr();
         $this->validateAddress = new ValidateAddress();
     }
@@ -177,6 +182,24 @@ class Nocks
         if(isset($settings['banks']))
         {
             return $settings['banks'];
+        }
+
+        return array();
+    }
+
+    /**
+     * Get list of all available banks
+     * @param $withdrawal
+     * @param $deposit
+     * @return mixed
+     */
+    public function getMarket($withdrawal, $deposit = null)
+    {
+        $market = $this->market->get($withdrawal, $deposit);
+
+        if(isset($market))
+        {
+            return $market;
         }
 
         return array();
