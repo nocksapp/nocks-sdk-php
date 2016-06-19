@@ -13,8 +13,8 @@ class Settings extends Api
      */
     public function get()
     {
-        $transaction = $this->client->get('settings');
+        $result = $this->client->get('settings');
 
-        return json_decode($transaction->body(), true);
+        return json_decode($result->body(), true);
     }
 }

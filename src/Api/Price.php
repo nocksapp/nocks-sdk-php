@@ -14,8 +14,8 @@ class Price extends Api
      */
     public function calculate($price)
     {
-        $transaction = $this->client->post('price', null, $price);
+        $result = $this->client->post('price', null, $price);
 
-        return json_decode($transaction->body(), true);
+        return json_decode($result->body(), true);
     }
 }
