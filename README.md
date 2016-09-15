@@ -49,8 +49,6 @@ $nocks = new \Nocks\SDK\Nocks();
 
 ###Create a transaction
 
-
-
 ```php
 $optionalParamaters = array();
 $nocks->createTransaction('BTC_NLG', 99.95, 'GcKNJKkTyPpt25LYkPjTCb5Sw6VvRbWds9', $optionalParamaters);
@@ -94,6 +92,17 @@ array(1) {
 		[0] => "Please fill in a valid Gulden address."
 	}
 }
+```
+
+###Transactions for merchants
+
+To use the Nocks API as a merchant, please [create a free account](https://nocks.co/user/register).
+
+```php
+$nocks->setMerchantApiKey('7e0866d53e134224e7251baf8568075d');
+
+$optionalParamaters = array();
+$nocks->createMerchantTransaction('NLG', 99.95, $optionalParamaters);
 ```
 
 ###Retrieve a list of payment methods
