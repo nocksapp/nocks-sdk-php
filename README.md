@@ -22,7 +22,9 @@ For more information on how to use/install composer, please visit: [https://gith
 
 To install the Nocks PHP sdk into your project, simply
 
+```
 $ composer require nocksapp/nocks-sdk-php
+```
 
 ### Installation without composer
 
@@ -43,4 +45,10 @@ Setup
 require __DIR__ . '/vendor/autoload.php';
 
 $nocks = new \Nocks\SDK\Nocks();
+```
+
+Create a transaction
+
+```php
+$transaction = $nocks->createTransaction('BTC_NLG', 500, 'GcKNJKkTyPpt25LYkPjTCb5Sw6VvRbWds9');
 ```
