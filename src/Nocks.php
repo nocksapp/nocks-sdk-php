@@ -37,6 +37,9 @@ class Nocks
     /* @var Addon\ValidateAddress $validateAddress */
     protected $validateAddress;
 
+    /* @var $merchantApiKey */
+    protected $merchantApiKey;
+
     public function __construct()
     {
         $this->transaction = new Transaction();
@@ -46,6 +49,34 @@ class Nocks
         $this->market = new Market();
         $this->qr = new Qr();
         $this->validateAddress = new ValidateAddress();
+        $this->merchantApiKey = null;
+    }
+
+    /**
+     * Creates a merchant transaction and returns transaction details
+     *
+     * @param $pair
+     * @param $amount
+     * @param $options
+     * @return Connection\Response
+     * @throws \Exception
+     */
+    public function createMerchantTransaction($pair, $amount, $options = array())
+    {
+        if(!$this->getMerchantApiKey())
+        {
+            throw new \Exception("Merchant API key required");
+        }
+
+        $transaction = array(
+            'pair' => $pair,
+            'amount' => $amount,
+            'merchant' => $this->getMerchantApiKey()
+        );
+
+        $data = array_merge($transaction, $options);
+
+        return $this->transaction->create($data);
     }
 
     /**
@@ -203,5 +234,21 @@ class Nocks
         }
 
         return array();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMerchantApiKey()
+    {
+        return $this->merchantApiKey;
+    }
+
+    /**
+     * @param mixed $merchantApiKey
+     */
+    public function setMerchantApiKey($merchantApiKey)
+    {
+        $this->merchantApiKey = $merchantApiKey;
     }
 }
