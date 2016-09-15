@@ -49,6 +49,8 @@ $nocks = new \Nocks\SDK\Nocks();
 
 ###Create a transaction
 
+
+
 ```php
 $optionalParamaters = array();
 $nocks->createTransaction('BTC_NLG', 99.95, 'GcKNJKkTyPpt25LYkPjTCb5Sw6VvRbWds9', $optionalParamaters);
@@ -65,6 +67,35 @@ Optional transaction paramaters
 | incomingPaymentMethod | ideal, wiretransfer, giropay, bancontact | | Only to be used with EUR_* pairs |
 | bank | {bankID} | | Only to be used with iDEAL. Can be retrieved by [iDEAL issuers](#retrieve-a-list-of-ideal-issuers) |
 
+Succes response
+
+```php
+array(1) {
+	["success"] => array(10) {
+		["status"] => "pending",
+		["transactionId"] => "ef51c5593f601f4c49ae5d4fd9634b1e",
+		["pair"] => "BTC_NLG",
+		["withdrawal"] => "GcKNJKkTyPpt25LYkPjTCb5Sw6VvRbWds9",
+		["withdrawalAmount"] => "99.95000",
+		["withdrawalTransactionId"] => NULL,
+		["deposit"] => "1NoXgmApDJykYKeb6oVe8KovkSfHqGmuvX",
+		["depositAmount"] => "0.00104",
+		["depositTransactionId"] => NULL,
+		["expiration"] => "2016-09-15 21:39:40"
+	}
+}
+```
+
+Error response
+
+```php
+array(1) {
+	["error"] => array(1) {
+		[0] => "Please fill in a valid Gulden address."
+	}
+}
+```
+
 ###Retrieve a list of payment methods
 
 ```php
@@ -79,3 +110,6 @@ $nocks->listBanks();
 
 ## API documentation
 If you wish to learn more about our API, please visit the [Nocks API](https://nocks.co/api).
+
+## Support
+Contact [www.nocks.co](https://nocks.co/support) - [support@nocks.co](mailto:support@nocks.co).
