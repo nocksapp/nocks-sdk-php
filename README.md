@@ -50,7 +50,7 @@ Optional transaction paramaters
 | fee | withdrawal, deposit | deposit | Apply fee on withdrawal or deposit |
 | responseUrl | https://yourwebsite.com/nocks/response | | Will be called with a POST value 'transactionId' when the status of a transaction changes. |
 | returnUrl | https://yourwebsite.com/nocks/return | | URL where the customer is supposed to return to after the payment is completed. |
-| incomingPaymentMethod | ideal, wiretransfer, giropay, bancontact | | Only to be used with EUR_* pairs |
+| paymentMethod | ideal, wiretransfer, giropay, bancontact | | Only to be used with EUR_* pairs |
 | bank | {bankID} | | Only to be used with iDEAL. Can be retrieved by [iDEAL issuers](#retrieve-a-list-of-ideal-issuers) |
 
 Succes response
