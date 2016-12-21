@@ -9,6 +9,7 @@ use Nocks\SDK\Api\Market;
 use Nocks\SDK\Api\Settings;
 use Nocks\SDK\Api\Transaction;
 use Nocks\SDK\Api\Price;
+use Nocks\SDK\Api\User;
 
 /**
  * Class Nocks
@@ -16,6 +17,9 @@ use Nocks\SDK\Api\Price;
  */
 class Nocks
 {
+    /* @var Api\User $user */
+    protected $user;
+
     /* @var Api\Transaction $transaction */
     protected $transaction;
 
@@ -42,6 +46,7 @@ class Nocks
 
     public function __construct()
     {
+        $this->user = new User();
         $this->transaction = new Transaction();
         $this->price = new Price();
         $this->rate = new Rate();
@@ -50,6 +55,25 @@ class Nocks
         $this->qr = new Qr();
         $this->validateAddress = new ValidateAddress();
         $this->merchantApiKey = null;
+    }
+
+    /**
+     * Creates a user and returns user details
+     *
+     * @param $email
+     * @param $displayName
+     * @param $password
+     * @param $passwordVerify
+     * @return Connection\Response
+     */
+    public function createUser($email, $displayName, $password, $passwordVerify)
+    {
+        return $this->user->create(array(
+            'email' => $email,
+            'displayName' => $displayName,
+            'password' => $password,
+            'passwordVerify' => $passwordVerify
+        ));
     }
 
     /**
