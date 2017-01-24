@@ -3,9 +3,9 @@
 namespace Nocks\SDK\Connection;
 
 use GuzzleHttp\Client as Guzzle;
-use GuzzleHttp\Message\RequestInterface;
-use GuzzleHttp\Message\ResponseInterface;
-use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class RestClient
@@ -18,14 +18,31 @@ class RestClient {
      */
     protected $guzzle;
 
+    /**
+     * @var string
+     */
+    protected $apiEndpoint;
+
+    /**
+     * @var array
+     */
+    protected $options = [];
+    /**
+     * @var array
+     */
+    protected $curlOptions = [];
+
     public function __construct($apiEndpoint) {
-        $this->guzzle = new Guzzle(array(
-            'base_url' => $apiEndpoint,
+        $this->apiEndpoint = $apiEndpoint;
+        $this->guzzle = $this->createGuzzleClient();
+    }
+
+    public function createGuzzleClient()
+    {
+        return new Guzzle(array(
+            'base_uri' => $this->apiEndpoint,
             'defaults' => array(
-                'headers' => array(
-                    'Accept' => '*/*'
-                ),
-                'debug' => false
+                'debug' => true
             )
         ));
     }
@@ -43,7 +60,9 @@ class RestClient {
      * @param   bool        $debug
      */
     public function setCurlDebugging($debug = true) {
-        $this->guzzle->setDefaultOption('debug', $debug);
+        $this->options['debug'] = $debug;
+
+        $this->guzzle = $this->createGuzzleClient();
     }
 
     /**
@@ -61,7 +80,9 @@ class RestClient {
      * @param bool      $value
      */
     public function setCurlDefaultOption($key, $value) {
-        $this->guzzle->setDefaultOption($key, $value);
+        $this->curlOptions[$key] = $value;
+
+        $this->guzzle = $this->createGuzzleClient();
     }
 
     /**
@@ -70,7 +91,9 @@ class RestClient {
      * @param   $proxy
      */
     public function setProxy($proxy) {
-        $this->guzzle->setDefaultOption('proxy', $proxy);
+        $this->options['proxy'] = $proxy;
+
+        $this->guzzle = $this->createGuzzleClient();
     }
 
     /**
@@ -120,6 +143,25 @@ class RestClient {
         return $this->request('DELETE', $endpointUrl, $queryString, $postData, $auth, 'url', $timeout);
     }
 
+    private static $replaceQuery = ['=' => '%3D', '&' => '%26'];
+    public static function hasQueryValue(Uri $uri, $key) {
+        $current = $uri->getQuery();
+        $key = strtr($key, self::$replaceQuery);
+
+        if (!$current) {
+            $result = [];
+        } else {
+            $result = [];
+            foreach (explode('&', $current) as $part) {
+                if (explode('=', $part)[0] === $key) {
+                    return true;
+                };
+            }
+        }
+
+        return false;
+    }
+
     /**
      * generic request executor
      *
@@ -130,26 +172,37 @@ class RestClient {
      * @param   string          $auth           http-signatures to enable http-signature signing
      * @param   string          $contentMD5Mode body or url
      * @param   float           $timeout        timeout in seconds
-     * @return RequestInterface
+     * @return Request
      */
     public function buildRequest($method, $endpointUrl, $queryString = null, $body = null, $auth = null, $contentMD5Mode = null, $timeout = null) {
 
-        $request = $this->guzzle->createRequest($method, $endpointUrl);
+        $request = new Request($method, $endpointUrl);
+        $uri = $request->getUri();
 
         if ($queryString) {
-            $request->getQuery()->replace($queryString);
+            foreach ($queryString as $k => $v) {
+                $uri = Uri::withQueryValue($uri, $k, $v);
+            }
         }
+
+        // normalize the query string the same way the server expects it
+        /** @var Request $request */
+        $request = $request->withUri($uri->withQuery($uri->getQuery()));
 
         if (!is_null($body)) {
             if (!$request->hasHeader('Content-Type')) {
-                $request->setHeader('Content-Type', 'application/json');
+                $request = $request->withHeader('Content-Type', 'application/json');
             }
 
+            if (!$request->hasHeader('Accept')) {
+                $request = $request->withHeader('Accept', '*/*');
+            }
+            
             if (!is_string($body)) {
                 $body = json_encode($body);
             }
 
-            $request->setBody(Stream::factory($body));
+            $request = $request->withBody(\GuzzleHttp\Psr7\stream_for($body));
         }
 
         return $request;
@@ -168,8 +221,8 @@ class RestClient {
      * @return Response
      */
     public function request($method, $endpointUrl, $queryString = null, $body = null, $auth = null, $contentMD5Mode = null, $timeout = null) {
-        $request = $this->buildRequest($method, $endpointUrl, $queryString, $body, $auth, $contentMD5Mode, $timeout);
-        $response = $this->guzzle->send($request);
+        $request = $this->buildRequest($method, $endpointUrl, $queryString, $body, $contentMD5Mode);
+        $response = $this->guzzle->send($request, ['auth' => $auth, 'timeout' => $timeout]);
 
         return $this->responseHandler($response);
     }
