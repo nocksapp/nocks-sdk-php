@@ -177,6 +177,11 @@ class RestClient {
     public function buildRequest($method, $endpointUrl, $queryString = null, $body = null, $auth = null, $contentMD5Mode = null, $timeout = null) {
 
         $request = new Request($method, $endpointUrl);
+
+        if (!$request->hasHeader('Accept')) {
+            $request = $request->withHeader('Accept', '*/*');
+        }
+
         $uri = $request->getUri();
 
         if ($queryString) {
@@ -194,10 +199,6 @@ class RestClient {
                 $request = $request->withHeader('Content-Type', 'application/json');
             }
 
-            if (!$request->hasHeader('Accept')) {
-                $request = $request->withHeader('Accept', '*/*');
-            }
-            
             if (!is_string($body)) {
                 $body = json_encode($body);
             }
