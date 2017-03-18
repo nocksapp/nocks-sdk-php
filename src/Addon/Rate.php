@@ -42,6 +42,6 @@ class Rate
             }
         }
 
-        return $rate;
+        return str_replace(',', '', $rate);
     }
 }
