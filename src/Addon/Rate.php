@@ -32,13 +32,19 @@ class Rate
         }
         elseif(in_array($currencyCode, array('BTC', 'NLG')))
         {
-            // Powered by Bittrex
-            $response = $this->client->get('http://bittrex.com/api/v1.1/public/getticker?market=BTC-NLG');
+            $btc_eur = $this->getCurrentRate('EUR');
+
+            $response = $this->client->get('http://nocks.co/api/market?call=nlg', [
+                'headers' => [
+                    'Accept' => '*/*'
+                ]
+            ]);
+
             $response = json_decode($response->getBody()->getContents(), true);
 
-            if(isset($response['result']['Last']))
+            if(isset($response['last']))
             {
-                $rate = $response['result']['Last'];
+                $rate = number_format($response['last'] / $btc_eur, 8);
             }
         }
 
