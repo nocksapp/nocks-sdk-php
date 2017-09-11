@@ -22,7 +22,7 @@ class Rate
         if(in_array($currencyCode, array('USD', 'GBP', 'EUR')))
         {
             // Powered by CoinDesk
-            $response = $this->client->get('https://api.coindesk.com/v1/bpi/currentprice.json');
+            $response = $this->client->get('http://api.coindesk.com/v1/bpi/currentprice.json');
             $response = json_decode($response->getBody()->getContents(), true);
 
             if(isset($response['bpi'][$currencyCode]['rate']))
@@ -39,6 +39,7 @@ class Rate
                     'Accept' => '*/*'
                 ]
             ]);
+
             $response = json_decode($response->getBody()->getContents(), true);
 
             if(isset($response['last']))
