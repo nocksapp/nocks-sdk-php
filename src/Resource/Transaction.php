@@ -69,11 +69,7 @@ class Transaction {
 	}
 
 	/**
-	 * @param int $page
-	 *
-	 * @param null|string $status
-	 * @param null|string $merchantProfile
-	 * @param null|string $search
+	 * @param array $queryParameters
 	 *
 	 * @return TransactionResponse
 	 * @throws \Nocks\SDK\Exception\BadRequestException
@@ -88,31 +84,10 @@ class Transaction {
 	 * @throws \Nocks\SDK\Exception\TooManyRequests
 	 * @throws \Nocks\SDK\Exception\UnauthorizedException
 	 */
-	public function find($page = 1, $status = null, $merchantProfile = null, $search = null) {
+	public function find(array $queryParameters = []) {
 		$this->resourceHelper->checkAuthenticated();
 
-		$queryStringData = ['page' => $page];
-		if (!is_null($status)) {
-			$queryStringData['status'] = $status;
-		}
-
-		if (!is_null($merchantProfile)) {
-			$queryStringData['merchant-profile'] = $merchantProfile;
-		}
-
-		if (!is_null($search)) {
-			$queryStringData['search'] = $search;
-		}
-
-		$response = $this->resourceHelper->getRequestHandler()->call(array_merge($this->resourceHelper->requestOptions, [
-			'url' => '?' . http_build_query($queryStringData),
-		]));
-
-		return $this->resourceHelper->getResponseHandler()->handle($response, function($data) {
-			return array_map(function($transaction) {
-				return $this->resourceHelper->getTransformer()->transform($transaction);
-			}, $data);
-		});
+		return $this->resourceHelper->find($queryParameters);
 	}
 
 	/**

@@ -17,7 +17,7 @@ class Balance {
 	/**
 	 * Find all the balances
 	 *
-	 * @param int $page
+	 * @param array $queryParameters
 	 *
 	 * @return BalanceResponse
 	 * @throws \Nocks\SDK\Exception\BadRequestException
@@ -27,15 +27,15 @@ class Balance {
 	 * @throws \Nocks\SDK\Exception\MethodNotAllowedException
 	 * @throws \Nocks\SDK\Exception\NotAcceptable
 	 * @throws \Nocks\SDK\Exception\NotFoundException
+	 * @throws \Nocks\SDK\Exception\ScopeConfigurationException
 	 * @throws \Nocks\SDK\Exception\ServiceUnavailable
 	 * @throws \Nocks\SDK\Exception\TooManyRequests
 	 * @throws \Nocks\SDK\Exception\UnauthorizedException
-	 * @throws \Nocks\SDK\Exception\ScopeConfigurationException
 	 */
-	public function find($page = 1) {
+	public function find(array $queryParameters = []) {
 		$this->resourceHelper->checkAuthenticated();
 
-		return $this->resourceHelper->find($page);
+		return $this->resourceHelper->find($queryParameters);
 	}
 
 	/**

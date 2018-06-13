@@ -54,7 +54,7 @@ class FundingSource {
 	/**
 	 * Find FundingSources
 	 *
-	 * @param int $page
+	 * @param array $queryParameters
 	 *
 	 * @return FundingSourceResponse
 	 * @throws \Nocks\SDK\Exception\BadRequestException
@@ -69,10 +69,10 @@ class FundingSource {
 	 * @throws \Nocks\SDK\Exception\TooManyRequests
 	 * @throws \Nocks\SDK\Exception\UnauthorizedException
 	 */
-	public function find($page = 1) {
+	public function find(array $queryParameters = []) {
 		$this->resourceHelper->checkAuthenticated();
 
-		return $this->resourceHelper->find($page);
+		return $this->resourceHelper->find($queryParameters);
 	}
 
 	/**

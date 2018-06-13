@@ -18,12 +18,12 @@ namespace Nocks\SDK\Model;
  * @method string getResource()
  *
  * @method void setUuid(string $uuid)
- * @method void setEmail(string $email)
  * @method void setGender(string $gender)
  * @method void setFirstName(string $firstName)
  * @method void setLastName(string $lastName)
- * @method void setMobile(string $mobile)
  * @method void setLocale(string $locale)
+ * @method void setEmailSecret(string $emailSecret)
+ * @method void setMobileSecret(string $mobileSecret)
  *
  * @package Nocks\SDK\Model
  */

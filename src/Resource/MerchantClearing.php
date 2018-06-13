@@ -28,7 +28,7 @@ class MerchantClearing {
 	 * Find MerchantClearings
 	 *
 	 * @param $merchantUuid
-	 * @param int $page
+	 * @param array $queryParameters
 	 *
 	 * @return MerchantClearingResponse
 	 * @throws \Nocks\SDK\Exception\BadRequestException
@@ -43,11 +43,11 @@ class MerchantClearing {
 	 * @throws \Nocks\SDK\Exception\TooManyRequests
 	 * @throws \Nocks\SDK\Exception\UnauthorizedException
 	 */
-	public function find($merchantUuid, $page = 1) {
+	public function find($merchantUuid, array $queryParameters = []) {
 		$this->resourceHelper->checkAuthenticated();
 		$this->setBaseUrl($merchantUuid);
 
-		return $this->resourceHelper->find($page);
+		return $this->resourceHelper->find($queryParameters);
 	}
 
 	/**

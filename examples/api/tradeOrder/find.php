@@ -9,8 +9,7 @@ try {
 	$accessToken = 'your_access_token';
 	$nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
 
-	$page = 1;
-	$result = $nocksApi->tradeOrder->find($page);
+	$result = $nocksApi->tradeOrder->find(['page' => 1, 'side' => 'sell', 'status' => 'cancelled']);
 } catch (\Nocks\SDK\Exception\Exception $e) {
 	echo $e->getMessage();
 }
