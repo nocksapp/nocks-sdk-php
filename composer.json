@@ -1,7 +1,7 @@
 {
   "name": "nocksapp/nocks-sdk-php",
   "description": "PHP SDK for the Nocks API",
-  "homepage": "https://nocks.co/",
+  "homepage": "https://nocks.com/",
   "keywords": ["nocks", "bitcoin", "gulden", "sdk", "api", "blockchain", "payment", "transaction"],
   "autoload": {
     "psr-4": {
@@ -10,9 +10,9 @@
   },
   "require": {
     "php": ">=5.4.0",
-
-    "guzzlehttp/guzzle": "6.2.*",
-    "endroid/qrcode": "^1.6"
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*"
   },
   "license": "MIT"
 }
