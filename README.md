@@ -46,19 +46,19 @@ use Nocks\SDK\NocksOauth;
 use Nocks\SDK\Constant\Platform;
 
 try {
-	$clientId = '1';
-	$clientSecret = '1234';
-	$scopes = ['user.read'];
-	$redirectUri = 'https://www.example.com';
+    $clientId = '1';
+    $clientSecret = '1234';
+    $scopes = ['user.read'];
+    $redirectUri = 'https://www.example.com';
 
-	$nocksOauth = new NocksOauth(Platform::SANDBOX, $clientId, $clientSecret, $scopes, $redirectUri);
-	$uri = $nocksOauth->getOauthUri();
+    $nocksOauth = new NocksOauth(Platform::SANDBOX, $clientId, $clientSecret, $scopes, $redirectUri);
+    $uri = $nocksOauth->getOauthUri();
 
     // For example, redirect the user to the Nocks login page
-	header('Location: ' . $uri);
-	die();
+    header('Location: ' . $uri);
+    die();
 } catch (\Nocks\SDK\Exception\Exception $e) {
-	// Handle any SDK exception
+    // Handle any SDK exception
 }
 ```
 
@@ -74,12 +74,12 @@ use Nocks\SDK\NocksApi;
 use Nocks\SDK\Constant\Platform;
 
 try {
-	$accessToken = 'your_access_token';
-	$nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
+    $accessToken = 'your_access_token';
+    $nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
 
-	$user = $nocksApi->user->findAuthenticated();
+    $user = $nocksApi->user->findAuthenticated();
 } catch (\Nocks\SDK\Exception\Exception $e) {
-	// Handle any SDK exception
+    // Handle any SDK exception
 }
 ```
 
@@ -100,19 +100,18 @@ use Nocks\SDK\NocksApi;
 use Nocks\SDK\Constant\Platform;
 
 try {
-	$accessToken = 'your_access_token';
-	$nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
+    $accessToken = 'your_access_token';
+    $nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
 
-	$result = $nocksApi->transaction->find();
-	$result->getPagination(); // Do something with pagination
+    $result = $nocksApi->transaction->find();
+    $result->getPagination(); // Do something with pagination
 	
-	// Loop through transactions
-	foreach ($result->getData() as $transaction) {
-	    // Do something with the transaction
-	}
-	
+    // Loop through transactions
+    foreach ($result->getData() as $transaction) {
+        // Do something with the transaction
+    }	
 } catch (\Nocks\SDK\Exception\Exception $e) {
-	// Handle any SDK exception
+    // Handle any SDK exception
 }
 ```
 
@@ -145,14 +144,14 @@ use Nocks\SDK\NocksApi;
 use Nocks\SDK\Constant\Platform;
 
 try {
-	$accessToken = 'your_access_token';
-	$nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
+    $accessToken = 'your_access_token';
+    $nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
 
     $userToUpdate = new User();
     // $userToUpdate->setUuid('1234'); Will occur in an exception when not set
-	$user = $nocksApi->user->update($userToUpdate);
+    $user = $nocksApi->user->update($userToUpdate);
 } catch (\Nocks\SDK\Exception\ValidationException $e) {
-	// A ValidationException will be thrown when the $userToUpdate has no uuid
+    // A ValidationException will be thrown when the $userToUpdate has no uuid
 }
 ```
 
@@ -166,16 +165,16 @@ use Nocks\SDK\NocksApi;
 use Nocks\SDK\Constant\Platform;
 
 try {
-	$accessToken = null;
-	$nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
+    $accessToken = null;
+    $nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
 
     $userToUpdate = new User([
         'uuid' => '1234',
         'locale' => 'nl_NL',
     ]);
-	$user = $nocksApi->user->update($userToUpdate);
+    $user = $nocksApi->user->update($userToUpdate);
 } catch (\Nocks\SDK\Exception\ScopeConfigurationException $e) {
-	// A ScopeConfigurationException will be thrown when the $accessToken is null
+    // A ScopeConfigurationException will be thrown when the $accessToken is null
 }
 ```
 
