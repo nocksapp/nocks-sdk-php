@@ -1,0 +1,74 @@
+<?php
+
+
+namespace Nocks\SDK\Model;
+
+/**
+ * Class User
+ *
+ * @method string getUuid()
+ * @method string getEmail()
+ * @method string getGender()
+ * @method string getFirstName()
+ * @method string getLastName()
+ * @method string getMobile()
+ * @method string getLocale()
+ * @method Date getCreatedAt()
+ * @method Date getUpdatedAt()
+ * @method string getResource()
+ *
+ * @method void setUuid(string $uuid)
+ * @method void setEmail(string $email)
+ * @method void setGender(string $gender)
+ * @method void setFirstName(string $firstName)
+ * @method void setLastName(string $lastName)
+ * @method void setMobile(string $mobile)
+ * @method void setLocale(string $locale)
+ *
+ * @package Nocks\SDK\Model
+ */
+class User extends Model {
+
+	/**
+	 * @return bool
+	 */
+	public function isEmailVerified() {
+		return boolval($this->email_verified);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isMobileVerified() {
+		return boolval($this->mobile_verified);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isActive() {
+		return boolval($this->is_active);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isVerified() {
+		return boolval($this->is_verified);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isTwoFactorEnabled() {
+		$prop = '2fa_enabled';
+		return boolval($this->{$prop});
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isIdentityVerified() {
+		return boolval($this->identity_verified);
+	}
+}
