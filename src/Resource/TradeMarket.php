@@ -33,7 +33,7 @@ class TradeMarket {
 	/**
 	 * Find TradeMarket
 	 *
-	 * @param int $page
+	 * @param array $queryParameters
 	 *
 	 * @return TradeMarketResponse
 	 * @throws \Nocks\SDK\Exception\BadRequestException
@@ -47,8 +47,8 @@ class TradeMarket {
 	 * @throws \Nocks\SDK\Exception\TooManyRequests
 	 * @throws \Nocks\SDK\Exception\UnauthorizedException
 	 */
-	public function find($page = 1) {
-		return $this->resourceHelper->find($page);
+	public function find(array $queryParameters = []) {
+		return $this->resourceHelper->find($queryParameters);
 	}
 
 	/**

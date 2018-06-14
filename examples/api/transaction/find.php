@@ -9,8 +9,7 @@ try {
 	$accessToken = 'your_access_token';
 	$nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
 
-	$page = 1;
-	$result = $nocksApi->transaction->find($page);
+	$result = $nocksApi->transaction->find(['page' => 1, 'status' => 'cancelled']);
 } catch (\Nocks\SDK\Exception\Exception $e) {
 	echo $e->getMessage();
 }

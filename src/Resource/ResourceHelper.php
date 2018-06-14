@@ -114,7 +114,7 @@ class ResourceHelper {
 	/**
 	 * Find request
 	 *
-	 * @param int $page
+	 * @param array $queryParameters
 	 *
 	 * @return mixed
 	 * @throws \Nocks\SDK\Exception\BadRequestException
@@ -128,9 +128,9 @@ class ResourceHelper {
 	 * @throws \Nocks\SDK\Exception\TooManyRequests
 	 * @throws \Nocks\SDK\Exception\UnauthorizedException
 	 */
-	public function find($page = 1) {
+	public function find(array $queryParameters = []) {
 		$response = $this->request->call(array_merge($this->requestOptions, [
-			'url' => '?page=' . $page,
+			'url' => '?' . http_build_query(array_merge(['page' => 1], $queryParameters)),
 		]));
 
 		return $this->responseHandler->handle($response, function($data) {
