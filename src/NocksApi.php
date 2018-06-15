@@ -5,6 +5,7 @@ namespace Nocks\SDK;
 
 
 use Nocks\SDK\Http\CurlRequest;
+use Nocks\SDK\Resource\Address;
 use Nocks\SDK\Resource\Balance;
 use Nocks\SDK\Resource\Bill;
 use Nocks\SDK\Resource\Deposit;
@@ -14,6 +15,7 @@ use Nocks\SDK\Resource\MerchantClearing;
 use Nocks\SDK\Resource\MerchantInvoice;
 use Nocks\SDK\Resource\MerchantProfile;
 use Nocks\SDK\Resource\ResourceHelper;
+use Nocks\SDK\Resource\Setting;
 use Nocks\SDK\Resource\TradeMarket;
 use Nocks\SDK\Resource\TradeOrder;
 use Nocks\SDK\Resource\Transaction;
@@ -21,6 +23,7 @@ use Nocks\SDK\Resource\TransactionPayment;
 use Nocks\SDK\Resource\User;
 use Nocks\SDK\Resource\Withdrawal;
 use Nocks\SDK\Scope\ApiScope;
+use Nocks\SDK\Transformer\AddressValidationTransformer;
 use Nocks\SDK\Transformer\BalanceTransformer;
 use Nocks\SDK\Transformer\BillTransformer;
 use Nocks\SDK\Transformer\DepositTransformer;
@@ -31,6 +34,7 @@ use Nocks\SDK\Transformer\MerchantProfileTransformer;
 use Nocks\SDK\Transformer\MerchantProfileTurnoverTransformer;
 use Nocks\SDK\Transformer\MerchantTransformer;
 use Nocks\SDK\Transformer\PaymentTransformer;
+use Nocks\SDK\Transformer\SettingTransformer;
 use Nocks\SDK\Transformer\TradeMarketBookTransformer;
 use Nocks\SDK\Transformer\TradeMarketCandleTransformer;
 use Nocks\SDK\Transformer\TradeMarketDistributionTransformer;
@@ -61,6 +65,8 @@ class NocksApi {
 	public $balance;
 	public $tradeOrder;
 	public $bill;
+	public $setting;
+	public $address;
 
 	public function __construct($platform, $accessToken = null) {
 		$this->scope = new ApiScope($platform, $accessToken);
@@ -128,6 +134,14 @@ class NocksApi {
 
 		$this->bill = new Bill(
 			new ResourceHelper($this->scope, $this->requestHandler, new BillTransformer(), 'bill')
+		);
+
+		$this->setting = new Setting(
+			new ResourceHelper($this->scope, $this->requestHandler, new SettingTransformer(), 'settings')
+		);
+
+		$this->address = new Address(
+			new ResourceHelper($this->scope, $this->requestHandler, new AddressValidationTransformer(), 'address')
 		);
 	}
 }

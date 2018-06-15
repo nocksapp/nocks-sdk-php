@@ -134,8 +134,8 @@ class ResourceHelper {
 		]));
 
 		return $this->responseHandler->handle($response, function($data) {
-			return array_map(function($transaction) {
-				return $this->transformer->transform($transaction);
+			return array_map(function($object) {
+				return $this->transformer->transform($object);
 			}, $data);
 		});
 	}
