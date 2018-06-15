@@ -57,14 +57,11 @@ class Transaction {
 	 * @throws \Nocks\SDK\Exception\MethodNotAllowedException
 	 * @throws \Nocks\SDK\Exception\NotAcceptable
 	 * @throws \Nocks\SDK\Exception\NotFoundException
-	 * @throws \Nocks\SDK\Exception\ScopeConfigurationException
 	 * @throws \Nocks\SDK\Exception\ServiceUnavailable
 	 * @throws \Nocks\SDK\Exception\TooManyRequests
 	 * @throws \Nocks\SDK\Exception\UnauthorizedException
 	 */
 	public function create(Model\Transaction $transaction) {
-		$this->resourceHelper->checkAuthenticated();
-
 		return $this->resourceHelper->create($transaction);
 	}
 
