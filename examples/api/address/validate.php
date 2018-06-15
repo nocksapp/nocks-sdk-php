@@ -14,6 +14,5 @@ try {
 		'address' => 'TB82wRPVSkS5pQmLVNeh8Z1zrQLAgWGZxo',
 	]));
 } catch (\Nocks\SDK\Exception\Exception $e) {
-	var_dump($e);
 	echo $e->getMessage();
 }
