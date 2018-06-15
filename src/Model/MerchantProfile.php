@@ -21,6 +21,6 @@ class MerchantProfile extends Model {
 	 * @return bool
 	 */
 	public function isActive() {
-		return boolval($this->is_active);
+		return (bool) $this->is_active;
 	}
 }

@@ -30,13 +30,13 @@ class FundingSource extends Model {
 	 * @return bool
 	 */
 	public function isActive() {
-		return boolval($this->is_active);
+		return (bool) $this->is_active;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isVerified() {
-		return boolval($this->is_verified);
+		return (bool) $this->is_verified;
 	}
 }
