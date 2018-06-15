@@ -33,28 +33,28 @@ class User extends Model {
 	 * @return bool
 	 */
 	public function isEmailVerified() {
-		return boolval($this->email_verified);
+		return (bool) $this->email_verified;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isMobileVerified() {
-		return boolval($this->mobile_verified);
+		return (bool) $this->mobile_verified;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isActive() {
-		return boolval($this->is_active);
+		return (bool) $this->is_active;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isVerified() {
-		return boolval($this->is_verified);
+		return (bool) $this->is_verified;
 	}
 
 	/**
@@ -62,13 +62,13 @@ class User extends Model {
 	 */
 	public function isTwoFactorEnabled() {
 		$prop = '2fa_enabled';
-		return boolval($this->{$prop});
+		return (bool) $this->{$prop};
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isIdentityVerified() {
-		return boolval($this->identity_verified);
+		return (bool) $this->identity_verified;
 	}
 }

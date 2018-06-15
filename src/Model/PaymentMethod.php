@@ -26,41 +26,41 @@ class PaymentMethod extends Model {
 	 * @return bool
 	 */
 	public function isVerificationMethod() {
-		return boolval($this->is_verification_method);
+		return (bool) $this->is_verification_method;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isTransactionMethod() {
-		return boolval($this->is_transaction_method);
+		return (bool) $this->is_transaction_method;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isDepositMethod() {
-		return boolval($this->is_deposit_method);
+		return (bool) $this->is_deposit_method;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isWithdrawalMethod() {
-		return boolval($this->is_withdrawal_method);
+		return (bool) $this->is_withdrawal_method;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isRefundMethod() {
-		return boolval($this->is_refund_method);
+		return (bool) $this->is_refund_method;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isDefault() {
-		return boolval($this->is_default);
+		return (bool) $this->is_default;
 	}
 }
