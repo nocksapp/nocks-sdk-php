@@ -14,6 +14,7 @@ namespace Nocks\SDK\Model;
  * @method float getFeeFixed()
  * @method float getFeePercentage()
  * @method float getResource()
+ * @method array getMetadata()
  *
  * @method void setMethod(string $method)
  * @method void setMetadata(array $metadata)
