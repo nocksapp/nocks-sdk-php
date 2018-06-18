@@ -42,6 +42,7 @@ use Nocks\SDK\Transformer\TradeMarketHistoryTransformer;
 use Nocks\SDK\Transformer\TradeMarketTransformer;
 use Nocks\SDK\Transformer\TradeOrderTransformer;
 use Nocks\SDK\Transformer\TransactionQuoteTransformer;
+use Nocks\SDK\Transformer\TransactionStatisticTransformer;
 use Nocks\SDK\Transformer\TransactionTransformer;
 use Nocks\SDK\Transformer\UserTransformer;
 use Nocks\SDK\Transformer\WithdrawalTransformer;
@@ -87,7 +88,8 @@ class NocksApi {
 
 		$this->transaction = new Transaction(
 			new ResourceHelper($this->scope, $this->requestHandler, new TransactionTransformer(), 'transaction'),
-			new TransactionQuoteTransformer()
+			new TransactionQuoteTransformer(),
+			new TransactionStatisticTransformer()
 		);
 
 		$this->transactionPayment = new TransactionPayment(

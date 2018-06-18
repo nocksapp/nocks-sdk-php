@@ -46,7 +46,7 @@ class NocksResponseHandler {
 			$pagination = isset($body['meta']) && isset($body['meta']['pagination']) ?
 				PaginationTransformer::transform($body['meta']['pagination']) : null;
 
-			if ($pagination || is_array($formattedData)) {
+			if ($pagination) {
 				return new NocksResponse($formattedData, $pagination);
 			}
 

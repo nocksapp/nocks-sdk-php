@@ -17,6 +17,7 @@ class CurrencyTransformer {
 		'amount',
 		'last',
 		'volume',
+		'volume_total',
 		'low',
 		'high',
 		'buy',

@@ -78,6 +78,7 @@
 <a href="api/transaction/find.php">find</a><br/>
 <a href="api/transaction/findOne.php">findOne</a><br/>
 <a href="api/transaction/cancel.php">cancel</a><br/>
+<a href="api/transaction/statistics.php">statistics</a><br/>
 
 <h3>TransactionPayment</h3>
 <a href="api/transactionPayment/create.php">create</a><br/>

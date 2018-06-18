@@ -11,10 +11,12 @@ class Transaction {
 
 	private $resourceHelper;
 	private $quoteTransformer;
+	private $statisticTransformer;
 
-	public function __construct(ResourceHelper $resourceHelper, Transformer $quoteTransformer) {
+	public function __construct(ResourceHelper $resourceHelper, Transformer $quoteTransformer, Transformer $statisticTransformer) {
 		$this->resourceHelper = $resourceHelper;
 		$this->quoteTransformer = $quoteTransformer;
+		$this->statisticTransformer = $statisticTransformer;
 	}
 
 	/**
@@ -129,5 +131,29 @@ class Transaction {
 		$this->resourceHelper->checkAuthenticated();
 
 		$this->resourceHelper->delete($uuid);
+	}
+
+	/**
+	 * @return Model\TransactionStatistic[]
+	 *
+	 * @throws \Nocks\SDK\Exception\BadRequestException
+	 * @throws \Nocks\SDK\Exception\ForbiddenException
+	 * @throws \Nocks\SDK\Exception\GoneException
+	 * @throws \Nocks\SDK\Exception\InternalServerError
+	 * @throws \Nocks\SDK\Exception\MethodNotAllowedException
+	 * @throws \Nocks\SDK\Exception\NotAcceptable
+	 * @throws \Nocks\SDK\Exception\NotFoundException
+	 * @throws \Nocks\SDK\Exception\ServiceUnavailable
+	 * @throws \Nocks\SDK\Exception\TooManyRequests
+	 * @throws \Nocks\SDK\Exception\UnauthorizedException
+	 */
+	public function statistics() {
+		$response = $this->resourceHelper->getRequestHandler()->call(array_merge($this->resourceHelper->requestOptions, [
+			'baseUrl' => $this->resourceHelper->getScope()->getBaseUrl() . 'transaction-statistics',
+		]));
+
+		return $this->resourceHelper->getResponseHandler()->handle($response, function($data) {
+			return $this->statisticTransformer->transform($data);
+		});
 	}
 }

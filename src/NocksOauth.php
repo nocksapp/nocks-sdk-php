@@ -203,7 +203,7 @@ class NocksOauth {
 	 *
 	 * @param $accessToken
 	 *
-	 * @return NocksResponse
+	 * @return array
 	 * @throws Exception\BadRequestException
 	 * @throws Exception\ForbiddenException
 	 * @throws Exception\GoneException
