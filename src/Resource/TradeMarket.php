@@ -125,7 +125,7 @@ class TradeMarket {
 			return array_map(function($history) {
 				return $this->historyTransformer->transform($history);
 			}, $data);
-		})->getData();
+		});
 	}
 
 	/**
@@ -185,6 +185,6 @@ class TradeMarket {
 			return array_map(function($candle) {
 				return $this->candlesTransformer->transform($candle);
 			}, $data);
-		})->getData();
+		});
 	}
 }
