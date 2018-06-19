@@ -42,6 +42,7 @@ namespace Nocks\SDK\Model;
  * @method void setRedirectUrl(string $redirectUrl)
  * @method void setCallbackUrl(string $callbackUrl)
  * @method void setLocale(string $locale)
+ * @method void setFeeType(string $feeType)
  *
  * @package Nocks\SDK\Model
  */

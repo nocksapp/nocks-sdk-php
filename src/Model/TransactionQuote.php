@@ -8,7 +8,7 @@ namespace Nocks\SDK\Model;
  *
  * @method Currency getSourceAmount()
  * @method Currency getTargetAmount()
- * @method Currency feeAmount()
+ * @method Currency getFeeAmount()
  *
  * @method void setMerchantProfile(string $merchantProfile)
  * @method void setSourceCurrency(string $sourceCurrency)
