@@ -11,10 +11,14 @@ class BalanceTransformer implements Transformer {
 
 	private $currencyTransformer;
 	private $balanceCurrencyTransformer;
+	private $userTransformer;
+	private $merchantTransformer;
 
 	public function __construct() {
 		$this->currencyTransformer = new CurrencyTransformer();
 		$this->balanceCurrencyTransformer = new BalanceCurrencyTransformer();
+		$this->userTransformer = new UserTransformer();
+		$this->merchantTransformer = new MerchantTransformer();
 	}
 
 	/**
@@ -29,6 +33,12 @@ class BalanceTransformer implements Transformer {
 
 		if (isset($data['currency']) && isset($data['currency']['data'])) {
 			$data['currency'] = $this->balanceCurrencyTransformer->transform($data['currency']['data']);
+		}
+
+		if (isset($data['balanceable']) && isset($data['type'])) {
+			$data['balanceable'] = $data['type'] === 'merchant' ?
+				$this->merchantTransformer->transform($data['balanceable']['data']) :
+				$this->userTransformer->transform($data['balanceable']['data']);
 		}
 
 		return new Balance($this->currencyTransformer->transform($data));

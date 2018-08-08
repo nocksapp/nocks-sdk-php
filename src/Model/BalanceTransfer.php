@@ -4,30 +4,26 @@
 namespace Nocks\SDK\Model;
 
 /**
- * Class Deposit
+ * Class BalanceTransfer
  *
  * @method string getUuid()
  * @method string getStatus()
  * @method string getType()
  * @method string getMethodType()
  * @method string getDescription()
+ * @method array getMetadata()
  * @method Date getCreatedAt()
  * @method Date getUpdatedAt()
  * @method string getResource()
  * @method Currency getAmount()
- * @method array getMetadata()
  * @method PaymentMethod getPaymentMethod()
- * @method string getCurrency()
  *
- * @method void setBalance(string $uuid)
- * @method void setType(string $type)
- * @method void setAmount(string $amount)
- * @method void setCurrency(string $currency)
- * @method void setPaymentMethod(PaymentMethod $paymentMethod)
- * @method void setMetadata(array $metadata)
+ * @method setBalanceFrom(string $uuid)
+ * @method setBalanceTo(string $uuid)
+ * @method setAmount(string $amount)
  *
  * @package Nocks\SDK\Model
  */
-class Deposit extends Model {
+class BalanceTransfer extends Model {
 
 }

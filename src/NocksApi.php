@@ -24,6 +24,7 @@ use Nocks\SDK\Resource\User;
 use Nocks\SDK\Resource\Withdrawal;
 use Nocks\SDK\Scope\ApiScope;
 use Nocks\SDK\Transformer\AddressValidationTransformer;
+use Nocks\SDK\Transformer\BalanceTransferTransformer;
 use Nocks\SDK\Transformer\BalanceTransformer;
 use Nocks\SDK\Transformer\BillTransformer;
 use Nocks\SDK\Transformer\DepositTransformer;
@@ -127,7 +128,8 @@ class NocksApi {
 		);
 
 		$this->balance = new Balance(
-			new ResourceHelper($this->scope, $this->requestHandler, new BalanceTransformer(), 'balance')
+			new ResourceHelper($this->scope, $this->requestHandler, new BalanceTransformer(), 'balance'),
+			new BalanceTransferTransformer()
 		);
 
 		$this->tradeOrder = new TradeOrder(
