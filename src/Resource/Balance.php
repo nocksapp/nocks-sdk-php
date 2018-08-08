@@ -5,13 +5,41 @@ namespace Nocks\SDK\Resource;
 
 
 use Nocks\SDK\Generated\BalanceResponse;
+use Nocks\SDK\Model;
+use Nocks\SDK\Transformer\Transformer;
 
 class Balance {
 
 	private $resourceHelper;
+	private $balanceTransferTransformer;
 
-	public function __construct(ResourceHelper $resourceHelper) {
+	public function __construct(ResourceHelper $resourceHelper, Transformer $balanceTransferTransformer) {
 		$this->resourceHelper = $resourceHelper;
+		$this->balanceTransferTransformer = $balanceTransferTransformer;
+	}
+
+	/**
+	 * Create a balance
+	 *
+	 * @param Model\Balance $balance
+	 *
+	 * @return mixed
+	 * @throws \Nocks\SDK\Exception\BadRequestException
+	 * @throws \Nocks\SDK\Exception\ForbiddenException
+	 * @throws \Nocks\SDK\Exception\GoneException
+	 * @throws \Nocks\SDK\Exception\InternalServerError
+	 * @throws \Nocks\SDK\Exception\MethodNotAllowedException
+	 * @throws \Nocks\SDK\Exception\NotAcceptable
+	 * @throws \Nocks\SDK\Exception\NotFoundException
+	 * @throws \Nocks\SDK\Exception\ScopeConfigurationException
+	 * @throws \Nocks\SDK\Exception\ServiceUnavailable
+	 * @throws \Nocks\SDK\Exception\TooManyRequests
+	 * @throws \Nocks\SDK\Exception\UnauthorizedException
+	 */
+	public function create(Model\Balance $balance) {
+		$this->resourceHelper->checkAuthenticated();
+
+		return $this->resourceHelper->create($balance);
 	}
 
 	/**
@@ -60,5 +88,37 @@ class Balance {
 		$this->resourceHelper->checkAuthenticated();
 
 		return $this->resourceHelper->findOne($currency);
+	}
+
+	/**
+	 * Transfer balance
+	 *
+	 * @param Model\BalanceTransfer $balanceTransfer
+	 *
+	 * @return mixed
+	 * @throws \Nocks\SDK\Exception\BadRequestException
+	 * @throws \Nocks\SDK\Exception\ForbiddenException
+	 * @throws \Nocks\SDK\Exception\GoneException
+	 * @throws \Nocks\SDK\Exception\InternalServerError
+	 * @throws \Nocks\SDK\Exception\MethodNotAllowedException
+	 * @throws \Nocks\SDK\Exception\NotAcceptable
+	 * @throws \Nocks\SDK\Exception\NotFoundException
+	 * @throws \Nocks\SDK\Exception\ScopeConfigurationException
+	 * @throws \Nocks\SDK\Exception\ServiceUnavailable
+	 * @throws \Nocks\SDK\Exception\TooManyRequests
+	 * @throws \Nocks\SDK\Exception\UnauthorizedException
+	 */
+	public function transfer(Model\BalanceTransfer $balanceTransfer) {
+		$this->resourceHelper->checkAuthenticated();
+
+		$response = $this->resourceHelper->getRequestHandler()->call(array_merge($this->resourceHelper->requestOptions, [
+			'method' => 'POST',
+			'url' => '/transfer',
+			'data' => $this->balanceTransferTransformer->reverseTransform($balanceTransfer),
+		]));
+
+		return $this->resourceHelper->getResponseHandler()->handle($response, function($data) {
+			return $this->balanceTransferTransformer->transform($data);
+		});
 	}
 }

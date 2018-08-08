@@ -18,6 +18,8 @@ namespace Nocks\SDK\Model;
  * @method array getMetadata()
  * @method PaymentMethod getPaymentMethod()
  *
+ * @method void setBalance(string $uuid)
+ * @method void setType(string $type)
  * @method void setAmount(string $amount)
  * @method void setCurrency(string $currency)
  * @method void setAddress(string $address)

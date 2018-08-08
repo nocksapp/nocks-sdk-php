@@ -13,8 +13,10 @@
 <a href="api/address/validate.php">validate</a><br/>
 
 <h3>Balance</h3>
+<a href="api/balance/create.php">create</a><br/>
 <a href="api/balance/find.php">find</a><br/>
 <a href="api/balance/findOne.php">findOne</a><br/>
+<a href="api/balance/transfer.php">transfer</a><br/>
 
 <h3>Bill</h3>
 <a href="api/bill/create.php">create</a><br/>
