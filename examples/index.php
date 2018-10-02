@@ -11,6 +11,7 @@
 
 <h3>Address</h3>
 <a href="api/address/validate.php">validate</a><br/>
+<a href="api/address/validateArray.php">validate array</a><br/>
 
 <h3>Balance</h3>
 <a href="api/balance/create.php">create</a><br/>
@@ -67,7 +68,8 @@
 <a href="api/tradeMarket/book.php">book</a><br/>
 <a href="api/tradeMarket/history.php">history</a><br/>
 <a href="api/tradeMarket/candles.php">candles</a><br/>
-<a href="api/tradeMarket/distribution.php">distribution</a>
+<a href="api/tradeMarket/distribution.php">distribution</a><br/>
+<a href="api/tradeMarket/quote.php">quote</a>
 
 <h3>TradeOrder</h3>
 <a href="api/tradeOrder/create.php">create</a><br/>
@@ -84,6 +86,7 @@
 
 <h3>TransactionPayment</h3>
 <a href="api/transactionPayment/create.php">create</a><br/>
+<a href="api/transactionPayment/findOne.php">findOne</a><br/>
 <a href="api/transactionPayment/cancel.php">cancel</a><br/>
 
 <h3>User</h3>

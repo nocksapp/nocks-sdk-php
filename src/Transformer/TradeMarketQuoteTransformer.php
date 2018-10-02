@@ -4,18 +4,18 @@
 namespace Nocks\SDK\Transformer;
 
 
-use Nocks\SDK\Model\AddressValidationResult;
 use Nocks\SDK\Model\Model;
+use Nocks\SDK\Model\TradeMarketQuote;
 
-class AddressValidationTransformer implements Transformer {
+class TradeMarketQuoteTransformer implements Transformer {
 
 	/**
 	 * @param array $data
 	 *
-	 * @return AddressValidationResult
+	 * @return TradeMarketQuote
 	 */
 	public function transform(array $data) {
-		return new AddressValidationResult($data['validation']);
+		return new TradeMarketQuote($data);
 	}
 
 	/**
