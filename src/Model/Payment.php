@@ -17,6 +17,7 @@ namespace Nocks\SDK\Model;
  * @method Currency getAmount()
  * @method array getMetadata()
  * @method PaymentMethod getPaymentMethod()
+ * @method array getPayable()
  *
  * @method void setAmount(Currency $amount)
  * @method void setPaymentMethod(PaymentMethod $paymentMethod)

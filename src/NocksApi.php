@@ -40,6 +40,7 @@ use Nocks\SDK\Transformer\TradeMarketBookTransformer;
 use Nocks\SDK\Transformer\TradeMarketCandleTransformer;
 use Nocks\SDK\Transformer\TradeMarketDistributionTransformer;
 use Nocks\SDK\Transformer\TradeMarketHistoryTransformer;
+use Nocks\SDK\Transformer\TradeMarketQuoteTransformer;
 use Nocks\SDK\Transformer\TradeMarketTransformer;
 use Nocks\SDK\Transformer\TradeOrderTransformer;
 use Nocks\SDK\Transformer\TransactionQuoteTransformer;
@@ -84,7 +85,8 @@ class NocksApi {
 			new TradeMarketBookTransformer(),
 			new TradeMarketHistoryTransformer(),
 			new TradeMarketDistributionTransformer(),
-			new TradeMarketCandleTransformer()
+			new TradeMarketCandleTransformer(),
+			new TradeMarketQuoteTransformer()
 		);
 
 		$this->transaction = new Transaction(

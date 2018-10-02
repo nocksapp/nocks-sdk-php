@@ -2,7 +2,6 @@
 
 require '../../../vendor/autoload.php';
 
-
 use Nocks\SDK\NocksApi;
 use Nocks\SDK\Constant\Platform;
 
@@ -10,7 +9,7 @@ try {
 	$accessToken = 'your_access_token';
 	$nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
 
-	$nocksApi->transactionPayment->cancel('fbe940b3-5b9d-472e-b9d5-265041225928');
+	$quote = $nocksApi->tradeMarket->quote('NLG-EUR', 'buy', 10);
 } catch (\Nocks\SDK\Exception\Exception $e) {
 	echo $e->getMessage();
 }

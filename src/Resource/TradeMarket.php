@@ -9,6 +9,7 @@ use Nocks\SDK\Model\TradeMarketBook;
 use Nocks\SDK\Model\TradeMarketCandle;
 use Nocks\SDK\Model\TradeMarketDistribution;
 use Nocks\SDK\Model\TradeMarketHistory;
+use Nocks\SDK\Model\TradeMarketQuote;
 use Nocks\SDK\Transformer\Transformer;
 
 class TradeMarket {
@@ -19,15 +20,18 @@ class TradeMarket {
 	private $historyTransformer;
 	private $distributionTransformer;
 	private $candlesTransformer;
+	private $quoteTransformer;
 
 	public function __construct(ResourceHelper $resourceHelper, Transformer $bookTransformer,
-		Transformer $historyTransformer, Transformer $distributionTransformer, Transformer $candlesTransformer) {
+		Transformer $historyTransformer, Transformer $distributionTransformer, Transformer $candlesTransformer,
+		Transformer $quoteTransformer) {
 		$this->resourceHelper = $resourceHelper;
 
 		$this->bookTransformer = $bookTransformer;
 		$this->historyTransformer = $historyTransformer;
 		$this->distributionTransformer = $distributionTransformer;
 		$this->candlesTransformer = $candlesTransformer;
+		$this->quoteTransformer = $quoteTransformer;
 	}
 
 	/**
@@ -185,6 +189,36 @@ class TradeMarket {
 			return array_map(function($candle) {
 				return $this->candlesTransformer->transform($candle);
 			}, $data);
+		});
+	}
+
+	/**
+	 * Get the quote
+	 *
+	 * @param $key
+	 * @param $side
+	 * @param $value
+	 * @param $amountType
+	 *
+	 * @return TradeMarketQuote
+	 * @throws \Nocks\SDK\Exception\BadRequestException
+	 * @throws \Nocks\SDK\Exception\ForbiddenException
+	 * @throws \Nocks\SDK\Exception\GoneException
+	 * @throws \Nocks\SDK\Exception\InternalServerError
+	 * @throws \Nocks\SDK\Exception\MethodNotAllowedException
+	 * @throws \Nocks\SDK\Exception\NotAcceptable
+	 * @throws \Nocks\SDK\Exception\NotFoundException
+	 * @throws \Nocks\SDK\Exception\ServiceUnavailable
+	 * @throws \Nocks\SDK\Exception\TooManyRequests
+	 * @throws \Nocks\SDK\Exception\UnauthorizedException
+	 */
+	public function quote($key, $side, $value, $amountType = null) {
+		$response = $this->resourceHelper->getRequestHandler()->call(array_merge($this->resourceHelper->requestOptions, [
+			'url' => '/' . $key . '/quote/' . $side . '/' . $value . ($amountType ? '/' . $amountType : ''),
+		]));
+
+		return $this->resourceHelper->getResponseHandler()->handle($response, function($data) {
+			return $this->quoteTransformer->transform($data);
 		});
 	}
 }

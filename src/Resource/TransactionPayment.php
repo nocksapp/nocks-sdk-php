@@ -19,9 +19,14 @@ class TransactionPayment {
 	 *
 	 * @param $transactionUuid
 	 */
-	private function setBaseUrl($transactionUuid) {
-		$this->resourceHelper->requestOptions['baseUrl'] = $this->resourceHelper->getScope()->getBaseUrl() .
-		                                                   'transaction/' . $transactionUuid . '/payment';
+	private function setBaseUrl($transactionUuid = null) {
+		if ($transactionUuid === null) {
+			$this->resourceHelper->requestOptions['baseUrl'] = $this->resourceHelper->getScope()->getBaseUrl() .
+			                                                   'payment';
+		} else {
+			$this->resourceHelper->requestOptions['baseUrl'] = $this->resourceHelper->getScope()->getBaseUrl() .
+			                                                   'transaction/' . $transactionUuid . '/payment';
+		}
 	}
 
 	/**
@@ -51,10 +56,33 @@ class TransactionPayment {
 	}
 
 	/**
-	 * Cancel a payment (inside a transaction)
-	 *
-	 * @param $transactionUuid
 	 * @param $uuid
+	 *
+	 * @return \Nocks\SDK\Model\Payment
+	 * @throws \Nocks\SDK\Exception\BadRequestException
+	 * @throws \Nocks\SDK\Exception\ForbiddenException
+	 * @throws \Nocks\SDK\Exception\GoneException
+	 * @throws \Nocks\SDK\Exception\InternalServerError
+	 * @throws \Nocks\SDK\Exception\MethodNotAllowedException
+	 * @throws \Nocks\SDK\Exception\NotAcceptable
+	 * @throws \Nocks\SDK\Exception\NotFoundException
+	 * @throws \Nocks\SDK\Exception\ScopeConfigurationException
+	 * @throws \Nocks\SDK\Exception\ServiceUnavailable
+	 * @throws \Nocks\SDK\Exception\TooManyRequests
+	 * @throws \Nocks\SDK\Exception\UnauthorizedException
+	 */
+	public function findOne($uuid) {
+		$this->resourceHelper->checkAuthenticated();
+		$this->setBaseUrl();
+
+		return $this->resourceHelper->findOne($uuid);
+	}
+
+	/**
+	 * Cancel a payment
+	 *
+	 * @param $uuid
+	 * @param $paymentUuid - deprecated backward compatibility
 	 *
 	 * @return void
 	 * @throws \Nocks\SDK\Exception\BadRequestException
@@ -69,10 +97,10 @@ class TransactionPayment {
 	 * @throws \Nocks\SDK\Exception\TooManyRequests
 	 * @throws \Nocks\SDK\Exception\UnauthorizedException
 	 */
-	public function cancel($transactionUuid, $uuid) {
+	public function cancel($uuid, $paymentUuid = null) {
 		$this->resourceHelper->checkAuthenticated();
-		$this->setBaseUrl($transactionUuid);
+		$this->setBaseUrl();
 
-		$this->resourceHelper->delete($uuid);
+		$this->resourceHelper->delete($paymentUuid === null ? $uuid : $paymentUuid);
 	}
 }
