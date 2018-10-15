@@ -23,6 +23,7 @@ namespace Nocks\SDK\Model;
  * @method Date getExpireAt()
  * @method string getMerchantProfile()
  * @method string getMerchantClearing()
+ * @method string getMerchantReference()
  * @method Date getCreatedAt()
  * @method Date getUpdatedAt()
  * @method string getResource()
@@ -31,6 +32,7 @@ namespace Nocks\SDK\Model;
  * @method PaymentMethod getPaymentMethod()
  *
  * @method void setMerchantProfile(string $merchantProfile)
+ * @method void setMerchantReference(string $merchantReference)
  * @method void setSourceCurrency(string $sourceCurrency)
  * @method void setTargetCurrency(string $targetCurrency)
  * @method void setTargetAddress(string $targetAddress)
