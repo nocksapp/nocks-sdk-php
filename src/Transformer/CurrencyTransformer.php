@@ -29,6 +29,7 @@ class CurrencyTransformer {
 		'amount_cost',
 		'amount_fee',
 		'amount_fillable',
+		'amount_refunded',
 		'available',
 		'reserved',
 		'deposit_max',

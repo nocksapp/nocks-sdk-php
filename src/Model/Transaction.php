@@ -7,6 +7,7 @@ namespace Nocks\SDK\Model;
  * Class Transaction
  *
  * @method string getUuid()
+ * @method string getPaymentUrl()
  * @method string getStatus()
  * @method Currency getAmount()
  * @method Currency getSourceAmount()
@@ -21,6 +22,7 @@ namespace Nocks\SDK\Model;
  * @method array getMetadata()
  * @method string getLocale()
  * @method Date getExpireAt()
+ * @method bool getExtendableExpiration()
  * @method string getMerchantProfile()
  * @method string getMerchantClearing()
  * @method string getMerchantReference()
@@ -30,6 +32,7 @@ namespace Nocks\SDK\Model;
  * @method Payment[] getPayments()
  * @method StatusTransition[] getStatusTransitions()
  * @method PaymentMethod getPaymentMethod()
+ * @method MerchantClearingDistribution getClearingDistribution()
  *
  * @method void setMerchantProfile(string $merchantProfile)
  * @method void setMerchantReference(string $merchantReference)

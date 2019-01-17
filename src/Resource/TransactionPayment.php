@@ -5,13 +5,17 @@ namespace Nocks\SDK\Resource;
 
 
 use Nocks\SDK\Model\Payment;
+use Nocks\SDK\Model\PaymentRefund;
+use Nocks\SDK\Transformer\PaymentRefundTransformer;
 
 class TransactionPayment {
 
 	private $resourceHelper;
+	private $paymentRefundTransformer;
 
-	public function __construct(ResourceHelper $resourceHelper) {
+	public function __construct(ResourceHelper $resourceHelper, PaymentRefundTransformer $paymentRefundTransformer) {
 		$this->resourceHelper = $resourceHelper;
+		$this->paymentRefundTransformer = $paymentRefundTransformer;
 	}
 
 	/**
@@ -35,7 +39,7 @@ class TransactionPayment {
 	 * @param $transactionUuid
 	 * @param Payment $payment
 	 *
-	 * @return \Nocks\SDK\Model\Payment
+	 * @return Payment
 	 * @throws \Nocks\SDK\Exception\BadRequestException
 	 * @throws \Nocks\SDK\Exception\ForbiddenException
 	 * @throws \Nocks\SDK\Exception\GoneException
@@ -102,5 +106,39 @@ class TransactionPayment {
 		$this->setBaseUrl();
 
 		$this->resourceHelper->delete($paymentUuid === null ? $uuid : $paymentUuid);
+	}
+
+	/**
+	 * Refund a payment
+	 *
+	 * @param $uuid
+	 * @param PaymentRefund $refund
+	 *
+	 * @return PaymentRefund
+	 * @throws \Nocks\SDK\Exception\BadRequestException
+	 * @throws \Nocks\SDK\Exception\ForbiddenException
+	 * @throws \Nocks\SDK\Exception\GoneException
+	 * @throws \Nocks\SDK\Exception\InternalServerError
+	 * @throws \Nocks\SDK\Exception\MethodNotAllowedException
+	 * @throws \Nocks\SDK\Exception\NotAcceptable
+	 * @throws \Nocks\SDK\Exception\NotFoundException
+	 * @throws \Nocks\SDK\Exception\ScopeConfigurationException
+	 * @throws \Nocks\SDK\Exception\ServiceUnavailable
+	 * @throws \Nocks\SDK\Exception\TooManyRequests
+	 * @throws \Nocks\SDK\Exception\UnauthorizedException
+	 */
+	public function refund($uuid, PaymentRefund $refund) {
+		$this->resourceHelper->checkAuthenticated();
+		$this->setBaseUrl();
+
+		$response = $this->resourceHelper->getRequestHandler()->call(array_merge($this->resourceHelper->requestOptions, [
+			'url' => '/' . $uuid . '/refund',
+			'method' => 'POST',
+			'data' => $this->resourceHelper->getTransformer()->reverseTransform($refund),
+		]));
+
+		return $this->resourceHelper->getResponseHandler()->handle($response, function($data) {
+			return $this->paymentRefundTransformer->transform($data);
+		});
 	}
 }

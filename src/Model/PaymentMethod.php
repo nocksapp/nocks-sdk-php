@@ -15,6 +15,7 @@ namespace Nocks\SDK\Model;
  * @method float getFeePercentage()
  * @method float getResource()
  * @method array getMetadata()
+ * @method string getExpirationTime()
  *
  * @method void setMethod(string $method)
  * @method void setMetadata(array $metadata)

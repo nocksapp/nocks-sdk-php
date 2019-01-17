@@ -4,7 +4,7 @@
 namespace Nocks\SDK\Model;
 
 /**
- * Class Payment
+ * Class PaymentRefund
  *
  * @method string getUuid()
  * @method string getStatus()
@@ -20,11 +20,12 @@ namespace Nocks\SDK\Model;
  * @method PaymentMethod getPaymentMethod()
  * @method array getPayable()
  *
+ * @method void setRefundAddress(string $refundAddress)
+ * @method void setDescription(string $description)
  * @method void setAmount(Currency $amount)
- * @method void setPaymentMethod(PaymentMethod $paymentMethod)
  *
  * @package Nocks\SDK\Model
  */
-class Payment extends Model {
+class PaymentRefund extends Model {
 
 }

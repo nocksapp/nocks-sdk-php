@@ -34,6 +34,7 @@ use Nocks\SDK\Transformer\MerchantInvoiceTransformer;
 use Nocks\SDK\Transformer\MerchantProfileTransformer;
 use Nocks\SDK\Transformer\MerchantProfileTurnoverTransformer;
 use Nocks\SDK\Transformer\MerchantTransformer;
+use Nocks\SDK\Transformer\PaymentRefundTransformer;
 use Nocks\SDK\Transformer\PaymentTransformer;
 use Nocks\SDK\Transformer\SettingTransformer;
 use Nocks\SDK\Transformer\TradeMarketBookTransformer;
@@ -96,7 +97,8 @@ class NocksApi {
 		);
 
 		$this->transactionPayment = new TransactionPayment(
-			new ResourceHelper($this->scope, $this->requestHandler, new PaymentTransformer(), 'payment')
+			new ResourceHelper($this->scope, $this->requestHandler, new PaymentTransformer(), 'payment'),
+			new PaymentRefundTransformer()
 		);
 
 		$this->fundingSource = new FundingSource(
