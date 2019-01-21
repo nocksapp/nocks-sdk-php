@@ -20,7 +20,7 @@ try {
 		])
 	];
 
-	$validation = $nocksApi->address->validateArray($addresses);
+	$validation = $nocksApi->paymentAddress->validateArray($addresses);
 } catch (\Nocks\SDK\Exception\Exception $e) {
 	echo $e->getMessage();
 }

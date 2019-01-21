@@ -9,7 +9,7 @@ use Nocks\SDK\Constant\Platform;
 try {
 	$nocksApi = new NocksApi(Platform::SANDBOX);
 
-	$paymentAddress = $nocksApi->address->validate(new PaymentAddress([
+	$paymentAddress = $nocksApi->paymentAddress->validate(new PaymentAddress([
 		'currency' => 'NLG',
 		'address' => 'TB82wRPVSkS5pQmLVNeh8Z1zrQLAgWGZxo',
 	]));

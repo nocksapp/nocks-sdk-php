@@ -70,7 +70,7 @@ class NocksApi {
 	public $tradeOrder;
 	public $bill;
 	public $setting;
-	public $address;
+	public $paymentAddress;
 
 	public function __construct($platform, $accessToken = null) {
 		$this->scope = new ApiScope($platform, $accessToken);
@@ -148,7 +148,7 @@ class NocksApi {
 			new ResourceHelper($this->scope, $this->requestHandler, new SettingTransformer(), 'settings')
 		);
 
-		$this->address = new PaymentAddress(
+		$this->paymentAddress = new PaymentAddress(
 			new ResourceHelper($this->scope, $this->requestHandler, new PaymentAddressValidationTransformer(), 'address')
 		);
 	}
