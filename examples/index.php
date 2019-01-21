@@ -9,6 +9,13 @@
 
 <h2>API Scope</h2>
 
+<h3>Address</h3>
+<a href="api/address/create.php">create</a><br/>
+<a href="api/address/delete.php">delete</a><br/>
+<a href="api/address/find.php">find</a><br/>
+<a href="api/address/findOne.php">findOne</a><br/>
+<a href="api/address/update.php">update</a><br/>
+
 <h3>Balance</h3>
 <a href="api/balance/create.php">create</a><br/>
 <a href="api/balance/find.php">find</a><br/>

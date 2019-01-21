@@ -5,6 +5,7 @@ namespace Nocks\SDK;
 
 
 use Nocks\SDK\Http\CurlRequest;
+use Nocks\SDK\Resource\Address;
 use Nocks\SDK\Resource\PaymentAddress;
 use Nocks\SDK\Resource\Balance;
 use Nocks\SDK\Resource\Bill;
@@ -23,6 +24,7 @@ use Nocks\SDK\Resource\TransactionPayment;
 use Nocks\SDK\Resource\User;
 use Nocks\SDK\Resource\Withdrawal;
 use Nocks\SDK\Scope\ApiScope;
+use Nocks\SDK\Transformer\AddressTransformer;
 use Nocks\SDK\Transformer\PaymentAddressValidationTransformer;
 use Nocks\SDK\Transformer\BalanceTransferTransformer;
 use Nocks\SDK\Transformer\BalanceTransformer;
@@ -71,6 +73,7 @@ class NocksApi {
 	public $bill;
 	public $setting;
 	public $paymentAddress;
+	public $address;
 
 	public function __construct($platform, $accessToken = null) {
 		$this->scope = new ApiScope($platform, $accessToken);
@@ -150,6 +153,10 @@ class NocksApi {
 
 		$this->paymentAddress = new PaymentAddress(
 			new ResourceHelper($this->scope, $this->requestHandler, new PaymentAddressValidationTransformer(), 'address')
+		);
+
+		$this->address = new Address(
+			new ResourceHelper($this->scope, $this->requestHandler, new AddressTransformer(), 'address')
 		);
 	}
 }
