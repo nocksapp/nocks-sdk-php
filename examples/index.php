@@ -9,10 +9,6 @@
 
 <h2>API Scope</h2>
 
-<h3>Address</h3>
-<a href="api/address/validate.php">validate</a><br/>
-<a href="api/address/validateArray.php">validate array</a><br/>
-
 <h3>Balance</h3>
 <a href="api/balance/create.php">create</a><br/>
 <a href="api/balance/find.php">find</a><br/>
@@ -58,6 +54,10 @@
 <a href="api/merchantProfile/findOne.php">findOne</a><br/>
 <a href="api/merchantProfile/delete.php">delete</a><br/>
 <a href="api/merchantProfile/turnover.php">turnover</a><br/>
+
+<h3>Payment Address</h3>
+<a href="api/paymentAddress/validate.php">validate</a><br/>
+<a href="api/paymentAddress/validateArray.php">validate array</a><br/>
 
 <h3>Setting</h3>
 <a href="api/setting/get.php">get</a><br/>

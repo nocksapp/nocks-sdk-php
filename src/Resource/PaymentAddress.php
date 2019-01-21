@@ -3,10 +3,9 @@
 
 namespace Nocks\SDK\Resource;
 
-use Nocks\SDK\Model\AddressValidation;
-use Nocks\SDK\Model\AddressValidationResult;
+use Nocks\SDK\Model\PaymentAddressValidationResult;
 
-class Address {
+class PaymentAddress {
 
 	private $resourceHelper;
 
@@ -15,9 +14,9 @@ class Address {
 	}
 
 	/**
-	 * @param AddressValidation $validation
+	 * @param \Nocks\SDK\Model\PaymentAddress $paymentAddress
 	 *
-	 * @return AddressValidation
+	 * @return \Nocks\SDK\Model\PaymentAddress
 	 * @throws \Nocks\SDK\Exception\BadRequestException
 	 * @throws \Nocks\SDK\Exception\ForbiddenException
 	 * @throws \Nocks\SDK\Exception\GoneException
@@ -29,24 +28,24 @@ class Address {
 	 * @throws \Nocks\SDK\Exception\TooManyRequests
 	 * @throws \Nocks\SDK\Exception\UnauthorizedException
 	 */
-	public function validate(AddressValidation $validation) {
+	public function validate(\Nocks\SDK\Model\PaymentAddress $paymentAddress) {
 		$response = $this->resourceHelper->getRequestHandler()->call(array_merge($this->resourceHelper->requestOptions, [
 			'method' => 'POST',
-			'data' => $validation->getData(),
+			'data' => $paymentAddress->getData(),
 			'url' => '/validate',
 		]));
 
-		return $this->resourceHelper->getResponseHandler()->handle($response, function($data) {
-			return new AddressValidation($data);
+		return $this->resourceHelper->getResponseHandler()->handle($response, function($data) use ($paymentAddress) {
+			return new \Nocks\SDK\Model\PaymentAddress(array_merge($paymentAddress->getData(), $data));
 		});
 	}
 
 	/**
 	 * Validate an array of addresses
 	 *
-	 * @param \Nocks\SDK\Model\Address[] $addressesToValidate
+	 * @param \Nocks\SDK\Model\PaymentAddress[] $addressesToValidate
 	 *
-	 * @return AddressValidationResult
+	 * @return PaymentAddressValidationResult
 	 * @throws \Nocks\SDK\Exception\BadRequestException
 	 * @throws \Nocks\SDK\Exception\ForbiddenException
 	 * @throws \Nocks\SDK\Exception\GoneException

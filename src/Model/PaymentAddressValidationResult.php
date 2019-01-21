@@ -5,11 +5,11 @@ namespace Nocks\SDK\Model;
 
 
 /**
- * Class AddressValidation
+ * Class PaymentAddressValidationResult
  *
  * @package Nocks\SDK\Model
  */
-class AddressValidationResult extends Model {
+class PaymentAddressValidationResult extends Model {
 
 	/**
 	 * Check if a address is valid

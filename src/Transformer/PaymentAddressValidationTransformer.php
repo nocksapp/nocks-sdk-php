@@ -4,18 +4,18 @@
 namespace Nocks\SDK\Transformer;
 
 
-use Nocks\SDK\Model\AddressValidationResult;
+use Nocks\SDK\Model\PaymentAddressValidationResult;
 use Nocks\SDK\Model\Model;
 
-class AddressValidationTransformer implements Transformer {
+class PaymentAddressValidationTransformer implements Transformer {
 
 	/**
 	 * @param array $data
 	 *
-	 * @return AddressValidationResult
+	 * @return PaymentAddressValidationResult
 	 */
 	public function transform(array $data) {
-		return new AddressValidationResult($data['validation']);
+		return new PaymentAddressValidationResult($data['validation']);
 	}
 
 	/**
