@@ -15,6 +15,7 @@ namespace Nocks\SDK\Model;
  * @method Date getUpdatedAt()
  * @method string getResource()
  * @method Currency getAmount()
+ * @method Currency getAmountRefunded()
  * @method array getMetadata()
  * @method PaymentMethod getPaymentMethod()
  * @method array getPayable()

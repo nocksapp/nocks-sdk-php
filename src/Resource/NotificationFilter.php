@@ -4,10 +4,10 @@
 namespace Nocks\SDK\Resource;
 
 
-use Nocks\SDK\Generated\AddressResponse;
+use Nocks\SDK\Generated\NotificationFilterResponse;
 use Nocks\SDK\Model;
 
-class Address {
+class NotificationFilter {
 
 	private $resourceHelper;
 
@@ -16,11 +16,11 @@ class Address {
 	}
 
 	/**
-	 * Create a address
+	 * Create a notification filter
 	 *
-	 * @param Model\Address $address
+	 * @param Model\NotificationFilter $notificationFilter
 	 *
-	 * @return Model\Address
+	 * @return Model\NotificationFilter
 	 * @throws \Nocks\SDK\Exception\BadRequestException
 	 * @throws \Nocks\SDK\Exception\ForbiddenException
 	 * @throws \Nocks\SDK\Exception\GoneException
@@ -33,18 +33,18 @@ class Address {
 	 * @throws \Nocks\SDK\Exception\TooManyRequests
 	 * @throws \Nocks\SDK\Exception\UnauthorizedException
 	 */
-	public function create(Model\Address $address) {
+	public function create(Model\NotificationFilter $notificationFilter) {
 		$this->resourceHelper->checkAuthenticated();
 
-		return $this->resourceHelper->create($address);
+		return $this->resourceHelper->create($notificationFilter);
 	}
 
 	/**
-	 * Find all the addresses
+	 * Find all the notification filters
 	 *
 	 * @param array $queryParameters
 	 *
-	 * @return AddressResponse
+	 * @return NotificationFilterResponse
 	 * @throws \Nocks\SDK\Exception\BadRequestException
 	 * @throws \Nocks\SDK\Exception\ForbiddenException
 	 * @throws \Nocks\SDK\Exception\GoneException
@@ -64,11 +64,11 @@ class Address {
 	}
 
 	/**
-	 * Find a single address
+	 * Find a single notification filter
 	 *
 	 * @param $uuid
 	 *
-	 * @return \Nocks\SDK\Model\Address
+	 * @return \Nocks\SDK\Model\NotificationFilter
 	 * @throws \Nocks\SDK\Exception\BadRequestException
 	 * @throws \Nocks\SDK\Exception\ForbiddenException
 	 * @throws \Nocks\SDK\Exception\GoneException
@@ -88,11 +88,11 @@ class Address {
 	}
 
 	/**
-	 * Update a Address
+	 * Update a notification filter
 	 *
-	 * @param Model\Address $address
+	 * @param Model\NotificationFilter $notificationFilter
 	 *
-	 * @return Model\Address
+	 * @return Model\NotificationFilter
 	 * @throws \Nocks\SDK\Exception\BadRequestException
 	 * @throws \Nocks\SDK\Exception\ForbiddenException
 	 * @throws \Nocks\SDK\Exception\GoneException
@@ -106,14 +106,14 @@ class Address {
 	 * @throws \Nocks\SDK\Exception\UnauthorizedException
 	 * @throws \Nocks\SDK\Exception\ValidationException
 	 */
-	public function update(Model\Address $address) {
+	public function update(Model\NotificationFilter $notificationFilter) {
 		$this->resourceHelper->checkAuthenticated();
 
-		return $this->resourceHelper->update($address);
+		return $this->resourceHelper->update($notificationFilter);
 	}
 
 	/**
-	 * Delete a Address
+	 * Delete a notification filter
 	 *
 	 * @param $uuid
 	 *

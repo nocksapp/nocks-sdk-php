@@ -7,7 +7,7 @@ use Nocks\SDK\Model\BalanceTransfer;
 use Nocks\SDK\NocksApi;
 
 try {
-	$accessToken = '';
+	$accessToken = 'your_access_token';
 	$nocksApi = new NocksApi(Platform::SANDBOX, $accessToken);
 
 	$balance = new BalanceTransfer();

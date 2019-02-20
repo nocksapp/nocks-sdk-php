@@ -12,6 +12,7 @@ namespace Nocks\SDK\Model;
  * @method string getIncrement()
  * @method Currency getAvailable()
  * @method string getResource()
+ * @method bool getUseForBalance()
  * @method PaymentMethod[] getDepositPaymentMethods()
  * @method PaymentMethod[] getWithdrawalPaymentMethods()
  *

@@ -10,8 +10,11 @@
 <h2>API Scope</h2>
 
 <h3>Address</h3>
-<a href="api/address/validate.php">validate</a><br/>
-<a href="api/address/validateArray.php">validate array</a><br/>
+<a href="api/address/create.php">create</a><br/>
+<a href="api/address/delete.php">delete</a><br/>
+<a href="api/address/find.php">find</a><br/>
+<a href="api/address/findOne.php">findOne</a><br/>
+<a href="api/address/update.php">update</a><br/>
 
 <h3>Balance</h3>
 <a href="api/balance/create.php">create</a><br/>
@@ -59,6 +62,17 @@
 <a href="api/merchantProfile/delete.php">delete</a><br/>
 <a href="api/merchantProfile/turnover.php">turnover</a><br/>
 
+<h3>NotificationFilter</h3>
+<a href="api/notificationFilter/create.php">create</a><br/>
+<a href="api/notificationFilter/delete.php">delete</a><br/>
+<a href="api/notificationFilter/find.php">find</a><br/>
+<a href="api/notificationFilter/findOne.php">findOne</a><br/>
+<a href="api/notificationFilter/update.php">update</a><br/>
+
+<h3>Payment Address</h3>
+<a href="api/paymentAddress/validate.php">validate</a><br/>
+<a href="api/paymentAddress/validateArray.php">validate array</a><br/>
+
 <h3>Setting</h3>
 <a href="api/setting/get.php">get</a><br/>
 
@@ -88,6 +102,7 @@
 <a href="api/transactionPayment/create.php">create</a><br/>
 <a href="api/transactionPayment/findOne.php">findOne</a><br/>
 <a href="api/transactionPayment/cancel.php">cancel</a><br/>
+<a href="api/transactionPayment/refund.php">refund</a><br/>
 
 <h3>User</h3>
 <a href="api/user/create.php">create</a><br/>

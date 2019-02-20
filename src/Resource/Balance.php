@@ -23,7 +23,7 @@ class Balance {
 	 *
 	 * @param Model\Balance $balance
 	 *
-	 * @return mixed
+	 * @return Model\Balance
 	 * @throws \Nocks\SDK\Exception\BadRequestException
 	 * @throws \Nocks\SDK\Exception\ForbiddenException
 	 * @throws \Nocks\SDK\Exception\GoneException
@@ -95,7 +95,7 @@ class Balance {
 	 *
 	 * @param Model\BalanceTransfer $balanceTransfer
 	 *
-	 * @return mixed
+	 * @return Model\BalanceTransfer
 	 * @throws \Nocks\SDK\Exception\BadRequestException
 	 * @throws \Nocks\SDK\Exception\ForbiddenException
 	 * @throws \Nocks\SDK\Exception\GoneException
