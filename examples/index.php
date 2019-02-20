@@ -62,6 +62,13 @@
 <a href="api/merchantProfile/delete.php">delete</a><br/>
 <a href="api/merchantProfile/turnover.php">turnover</a><br/>
 
+<h3>NotificationFilter</h3>
+<a href="api/notificationFilter/create.php">create</a><br/>
+<a href="api/notificationFilter/delete.php">delete</a><br/>
+<a href="api/notificationFilter/find.php">find</a><br/>
+<a href="api/notificationFilter/findOne.php">findOne</a><br/>
+<a href="api/notificationFilter/update.php">update</a><br/>
+
 <h3>Payment Address</h3>
 <a href="api/paymentAddress/validate.php">validate</a><br/>
 <a href="api/paymentAddress/validateArray.php">validate array</a><br/>

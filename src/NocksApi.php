@@ -6,6 +6,7 @@ namespace Nocks\SDK;
 
 use Nocks\SDK\Http\CurlRequest;
 use Nocks\SDK\Resource\Address;
+use Nocks\SDK\Resource\NotificationFilter;
 use Nocks\SDK\Resource\PaymentAddress;
 use Nocks\SDK\Resource\Balance;
 use Nocks\SDK\Resource\Bill;
@@ -25,6 +26,7 @@ use Nocks\SDK\Resource\User;
 use Nocks\SDK\Resource\Withdrawal;
 use Nocks\SDK\Scope\ApiScope;
 use Nocks\SDK\Transformer\AddressTransformer;
+use Nocks\SDK\Transformer\NotificationFilterTransformer;
 use Nocks\SDK\Transformer\PaymentAddressValidationTransformer;
 use Nocks\SDK\Transformer\BalanceTransferTransformer;
 use Nocks\SDK\Transformer\BalanceTransformer;
@@ -74,6 +76,7 @@ class NocksApi {
 	public $setting;
 	public $paymentAddress;
 	public $address;
+	public $notificationFilter;
 
 	public function __construct($platform, $accessToken = null) {
 		$this->scope = new ApiScope($platform, $accessToken);
@@ -157,6 +160,10 @@ class NocksApi {
 
 		$this->address = new Address(
 			new ResourceHelper($this->scope, $this->requestHandler, new AddressTransformer(), 'address')
+		);
+
+		$this->notificationFilter = new NotificationFilter(
+			new ResourceHelper($this->scope, $this->requestHandler, new NotificationFilterTransformer(), 'notification-filter')
 		);
 	}
 }
