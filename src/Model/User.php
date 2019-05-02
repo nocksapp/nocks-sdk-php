@@ -7,6 +7,7 @@ namespace Nocks\SDK\Model;
  * Class User
  *
  * @method string getUuid()
+ * @method string getType()
  * @method string getEmail()
  * @method string getGender()
  * @method string getFirstName()

@@ -41,6 +41,7 @@ namespace Nocks\SDK\Model;
  * @method void setTargetAddress(string $targetAddress)
  * @method void setRefundAddress(string $refundAddress)
  * @method void setAmount(Currency $amount)
+ * @method void setDescription(string $description)
  * @method void setTipAmount(Currency $tipAmount)
  * @method void setPaymentMethod(PaymentMethod $paymentMethod)
  * @method void setMetadata(array $metadata)

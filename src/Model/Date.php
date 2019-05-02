@@ -3,10 +3,11 @@
 
 namespace Nocks\SDK\Model;
 
+
+use DateTime;
+
 /**
  * Class Date
- *
- * @method getTimestamp()
  *
  * @package Nocks\SDK\Model
  */
@@ -14,13 +15,22 @@ class Date extends Model {
 
 	private $dateTime = null;
 
-	public function __construct($data) {
+	public function __construct(array $data = []) {
 		parent::__construct($data);
 
 		if ($this->hasTimestamp()) {
-			$this->dateTime = new \DateTime();
+			$this->dateTime = new DateTime();
 			$this->dateTime->setTimestamp($this->getTimestamp());
 		}
+	}
+
+	/**
+	 * Set DateTime
+	 *
+	 * @param DateTime $dateTime
+	 */
+	public function setDateTime(DateTime $dateTime) {
+		$this->dateTime = $dateTime;
 	}
 
 	/**
@@ -35,7 +45,7 @@ class Date extends Model {
 	/**
 	 * Get DateTime
 	 *
-	 * @return \DateTime|null
+	 * @return DateTime|null
 	 */
 	public function getDateTime() {
 		return $this->dateTime;

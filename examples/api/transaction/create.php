@@ -20,6 +20,7 @@ try {
 			'value' => 250,
 			'currency' => 'NLG',
 		]),
+		'description' => 'Test transaction',
 		'payment_method' => new PaymentMethod([
 			'method' => 'gulden'
 		]),
