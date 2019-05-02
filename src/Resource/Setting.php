@@ -12,7 +12,6 @@ class Setting {
 		$this->resourceHelper = $resourceHelper;
 	}
 
-
 	/**
 	 * Get the Nocks settings
 	 *

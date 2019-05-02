@@ -9,19 +9,23 @@ namespace Nocks\SDK\Model;
  * @method string getAmount()
  * @method string getCurrency()
  *
+ * @method void setAmount(string $amount)
+ * @method void setCurrency(string $currency)
+ *
  * @package Nocks\SDK\Model
  */
 class Currency extends Model {
 
 	private $value;
 
-	public function __construct(array $data = null) {
+	public function __construct(array $data = []) {
 		parent::__construct($data);
 
-		$this->value = isset($data['value']) ? $data['value'] : floatval($this->getAmount());
-
-		if (!isset($this->amount)) {
-			$this->amount = (string) $this->value;
+		if (isset($data['value'])) {
+			$this->setValue($data['value']);
+			$this->setAmount((string) $this->value);
+		} else if ($this->hasAmount()) {
+			$this->value = floatval($this->getAmount());
 		}
 	}
 
@@ -30,6 +34,7 @@ class Currency extends Model {
 	 */
 	public function setValue($value) {
 		$this->value = $value;
+		$this->setAmount((string) $this->value);
 	}
 
 	/**

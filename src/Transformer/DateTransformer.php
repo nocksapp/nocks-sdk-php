@@ -47,6 +47,12 @@ class DateTransformer {
 	 * @return mixed
 	 */
 	public function reverseTransform($data) {
+		foreach (DateTransformer::$properties as $property) {
+			if (isset($data[$property]) && $data[$property] instanceof Date && $data[$property]->hasDateTime()) {
+				$data[$property] = $data[$property]->getDateTime()->format('Y-m-d H:i:s');
+			}
+		}
+
 		return $data;
 	}
 }

@@ -3,6 +3,8 @@
 
 namespace Nocks\SDK\Model;
 
+use DateTime;
+
 /**
  * Class TradeOrder
  *
@@ -27,6 +29,9 @@ namespace Nocks\SDK\Model;
  * @method Date getFilledAt()
  * @method string getTradeMarket()
  * @method string getResource()
+ * @method boolean getPostOnly()
+ * @method string getTimeInForce()
+ * @method Date getExpireAt()
  *
  * @method void setAmount(string $amount)
  * @method void setSide(string $side)
@@ -34,15 +39,39 @@ namespace Nocks\SDK\Model;
  * @method void setStop(string $stop)
  * @method void setStopRate(string $stopRate)
  * @method void setLabel(string $label)
+ * @method void setPostOnly(boolean $postOnly)
+ * @method void setTimeInForce(string $timeInForce)
  *
  * @package Nocks\SDK\Model
  */
 class TradeOrder extends Model {
 
+	public function __construct(array $data = []) {
+		parent::__construct($data);
+
+		// Make sure "expireAt" is casted to a "Date"
+		if ($this->hasExpireAt()) {
+			$this->setExpireAt($this->getExpireAt());
+		}
+	}
+
 	/**
-	 * @param $tradeMarket
+	 * @param string $tradeMarket
 	 */
 	public function setTradeMarket($tradeMarket) {
 		$this->{'trade-market'} = $tradeMarket;
+	}
+
+	/**
+	 * @param DateTime|Date $expireAt
+	 */
+	public function setExpireAt($expireAt) {
+		if ($expireAt instanceof Date) {
+			$this->expireAt = $expireAt;
+		} else {
+			$expireAtDate = new Date();
+			$expireAtDate->setDateTime($expireAt);
+			$this->expireAt = $expireAtDate;
+		}
 	}
 }

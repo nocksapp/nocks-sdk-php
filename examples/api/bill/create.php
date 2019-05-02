@@ -17,18 +17,19 @@ try {
 	$bill->setName('John Do');
 	$bill->setFrequence('once');
 	$bill->setDescription('Hello');
-	$bill->setAmount(new Currency([
-		'value' => 10,
-		'currency' => 'EUR',
-	]));
-	$bill->setDateStart('2018-07-01');
-	$bill->setAddress('NL16ABNA0602167736');
+	$bill->setDateStart('2019-07-01');
+	$bill->setAddress('NL63BUNQ9900005074');
 	$bill->setPaymentMethod(new PaymentMethod([
 		'method' => 'ideal',
 		'metadata' => [
 			'issuer' => 'ABNANL2A'
 		]
 	]));
+
+	$amount = new Currency();
+	$amount->setCurrency('EUR');
+	$amount->setValue(10);
+	$bill->setAmount($amount);
 
 	$createdBill = $nocksApi->bill->create($bill);
 } catch (\Nocks\SDK\Exception\Exception $e) {
